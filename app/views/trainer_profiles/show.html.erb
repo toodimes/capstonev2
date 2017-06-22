@@ -1,0 +1,14 @@
+<%= image_tag "#{@trainer.avatars.last.url}", class: "media-object avatar" %>
+<% if current_user && current_user.id == @trainer.id %>
+  <p><a href="/avatars/new">Edit Avatar</a></p>
+<% end %>
+<h2><%= @trainer.trainer_profile.name %></h2>
+<p>Gender: <%= @trainer.trainer_profile.gender.capitalize %></p>
+<p>Experience: <%= @trainer.trainer_profile.experience %></p>
+<p>Qualifications: <%= @trainer.trainer_profile.qualifications %></p>
+<% if @clients.length >= 1 %>
+  <h3>Clients</h3>
+    <% @clients.each do |client| %>
+      <p><%= client.user_profile.name %></p>
+    <% end %>
+<% end %>

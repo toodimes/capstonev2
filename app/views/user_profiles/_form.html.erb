@@ -1,0 +1,9 @@
+<h2><%= heading %></h2>
+<%= form_tag url, method: form_method do %>
+  <p>Name:</p><input type="text" name="name" placeholder="<%= current_user.user_profile.name %>">
+  <p>Gender:</p>
+    <input type="radio" name="gender" value="male">Male<br>
+    <input type="radio" name="gender" value="female">Female<br>
+  <p>Equipment?<input type="checkbox" name="equipment"></p>
+  <input type="submit" value="<%= submit_message %>">
+<% end %>

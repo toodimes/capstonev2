@@ -1,0 +1,8 @@
+<h1>Avatars#new</h1>
+<p>Find me in app/views/avatars/new.html.erb</p>
+<p>Current Avatar</p>
+<%= image_tag "#{current_user.avatars.last.url}", class: "media-object" %>
+<%= form_tag "/avatars", method: :post do  %>
+  <p>URL: <input type="text" name="url" ></p>
+  <input type="submit" value="Submit">
+<% end %>
