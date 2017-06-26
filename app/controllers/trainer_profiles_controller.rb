@@ -1,10 +1,11 @@
 class TrainerProfilesController < ApplicationController
   def index
+    @trainers = User.where(trainer_id: nil).order(id: :asc)
   end
 
   def show
     @trainer = User.find_by(id: params[:id])
-    @clients = User.where(trainer_id: @trainer.trainer_profile.id)
+    @clients = @trainer.users
   end
 
   def new

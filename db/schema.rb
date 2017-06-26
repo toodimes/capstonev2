@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170622003036) do
+ActiveRecord::Schema.define(version: 20170625155915) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -18,6 +18,42 @@ ActiveRecord::Schema.define(version: 20170622003036) do
   create_table "avatars", force: :cascade do |t|
     t.string   "url"
     t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "descriptions", force: :cascade do |t|
+    t.string   "note"
+    t.integer  "exercise_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  create_table "exercise_images", force: :cascade do |t|
+    t.string   "url",         default: "https://media.giphy.com/media/1w3MyWVVj2giA/giphy.gif"
+    t.integer  "exercise_id"
+    t.datetime "created_at",                                                                    null: false
+    t.datetime "updated_at",                                                                    null: false
+  end
+
+  create_table "exercises", force: :cascade do |t|
+    t.string   "name"
+    t.boolean  "equipment",  default: false
+    t.integer  "muscle_id"
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+  end
+
+  create_table "goals", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "user_id"
+    t.boolean  "completed",  default: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+  end
+
+  create_table "muscles", force: :cascade do |t|
+    t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

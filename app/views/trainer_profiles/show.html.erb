@@ -9,6 +9,6 @@
 <% if @clients.length >= 1 %>
   <h3>Clients</h3>
     <% @clients.each do |client| %>
-      <p><%= client.user_profile.name %></p>
+      <p> <a href="/user_profiles/<%= client.id %>"><%= client.user_profile.name %></a></p>
     <% end %>
 <% end %>

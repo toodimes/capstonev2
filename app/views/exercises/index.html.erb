@@ -1,0 +1,9 @@
+<h1>Exercises#index</h1>
+<p>Find me in app/views/exercises/index.html.erb</p>
+<% @exercises.each do |exercise| %>
+  <h3><a href="/exercises/<%= exercise.id %>"><%= exercise.name %></a></h3>
+  <h4>Muscle: <%= exercise.muscle.name %></h4>
+  <img src="<%= exercise.exercise_images.last.url %>" alt="">
+  <p><%= exercise.descriptions.last.note %></p>
+  <hr>
+<% end %>

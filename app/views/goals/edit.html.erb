@@ -1,0 +1,8 @@
+<h1>Goals#edit</h1>
+<p>Find me in app/views/goals/edit.html.erb</p>
+<h2>Lets edit this goal!</h2>
+<%= form_tag "/user_profiles/#{@user.id}/goals/#{params[:id]}", method: :patch do %>
+  <input type="text" name="name" value="<%= @goal.name %>" class="form-control">
+  <p>Completed:<input type="checkbox" name="completed" <%= @goal.completed ? 'checked' : '' %>></p>
+  <input type="submit" value="Edit Goal">
+<% end %>

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   devise_for :users, controllers: { registrations: 'users/registrations', sessions: 'users/sessions' }
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   devise_scope :user do
@@ -10,8 +11,10 @@ Rails.application.routes.draw do
   get "/avatars/new" => "avatars#new"
   post "/avatars" => "avatars#create"
 
-  resources :user_profiles, except: [:create]
-
+  resources :user_profiles, except: [:create] do 
+    resources :goals, except: [:show]
+  end
   resources :trainer_profiles, except: [:create]
+  resources :exercises
   
 end

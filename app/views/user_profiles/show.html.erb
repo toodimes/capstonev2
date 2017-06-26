@@ -9,5 +9,11 @@
   <p>Gender: <%= @user.user_profile.gender.capitalize %></p>
   <p>Has Equipment: <%= @user.user_profile.equipment ? "Yes" : "No" %></p>
   <p>Has Paid: <%= @user.user_profile.paid ? "Yes" : "No" %></p>
-  <p>Trainer: <%= @user.trainer.trainer_profile.name %></p>
+  <p>Trainer: <a href="/trainer_profiles/<%= @user.trainer.id %>"><%= @user.trainer.trainer_profile.name %></a></p>
+  <% if @user.goals %>
+    <h2><a href="/user_profiles/<%= @user.id %>/goals">Goals:</a></h2>
+    <% @user.goals.each do |goal| %>
+      <p><%= goal.name %><i class="fa <%= goal.completed ? 'fa-check-square-o' : 'fa-square-o' %>"></i></p>
+    <% end %>
+  <% end %>
 </div>

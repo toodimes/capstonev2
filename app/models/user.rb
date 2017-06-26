@@ -12,6 +12,7 @@ class User < ApplicationRecord
   has_many :goals
 
   belongs_to :trainer, class_name: "User", optional: true
+  has_many :users, foreign_key: "trainer_id"
 
   after_create :create_profile
 

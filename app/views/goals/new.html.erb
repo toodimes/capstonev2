@@ -1,0 +1,7 @@
+<h1>Goals#new</h1>
+<p>Find me in app/views/goals/new.html.erb</p>
+<h2>Add a Goal to <%= @user.user_profile.name %></h2>
+<%= form_tag "/user_profiles/#{@user.id}/goals", method: :post do %>
+  <input type="text" name="name" placeholder="Goal" class="form-control">
+  <input type="submit" value="Add Goal">
+<% end %>

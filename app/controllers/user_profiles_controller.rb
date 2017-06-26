@@ -1,5 +1,6 @@
 class UserProfilesController < ApplicationController
   def index
+    @users = User.where.not(trainer_id: nil).order(id: :asc)
   end
 
   def show
@@ -8,6 +9,7 @@ class UserProfilesController < ApplicationController
 
   def new
     @user = User.find_by(id: current_user.id)
+    # @goals = user.goals
   end
 
   # def create

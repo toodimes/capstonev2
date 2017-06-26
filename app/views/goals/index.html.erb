@@ -1,0 +1,11 @@
+<h1>Goals#index</h1>
+<p>Find me in app/views/goals/index.html.erb</p>
+<% @goals.each do |goal| %>
+  <h3><%= goal.name %> <i class="fa <%= goal.completed ? 'fa-check-square-o' : 'fa-square-o' %>"></i> 
+  <% if current_user && current_user.id == goal.user.id || current_user && current_user.id == goal.user.trainer.id %>
+  || <a href="/user_profiles/<%= @user.id %>/goals/<%= goal.id %>/edit">Edit Goal</a> 
+  || <%= link_to("Mark Completed", "/user_profiles/#{@user.id}/goals/#{goal.id}", method: :delete) %>
+  <% end %>
+  </h3>
+
+<% end %>

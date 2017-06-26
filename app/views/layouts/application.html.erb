@@ -3,12 +3,16 @@
   <head>
     <title>CapstoneV2</title>
     <%= csrf_meta_tags %>
+    <link id="target" href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Oswald:400,300' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Oxygen:400,300,700' rel='stylesheet' type='text/css'>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
+    <%= render "layouts/navbar" %>
     <!-- FLASH MESSAGES -->
     <% flash.each do |name, message| %>
       <div class="alert alert-<%= name %> alert-dismissable" role="alert">
@@ -16,9 +20,14 @@
         <h2><%= message %></h2>
       </div>
     <% end %>
-    <% if current_user %>
-      <%= current_user.email %>
-    <% end %>
     <%= yield %>
+
+    <script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
+    <script>window.jQuery || document.write('<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js">\x3C/script>')</script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/docs/js/custom.js"></script>
+    <script src="/docs/js/jquery.cookies.js"></script>
+    <script src="/docs/js/modernizr.custom.js"></script>
+
   </body>
 </html>
