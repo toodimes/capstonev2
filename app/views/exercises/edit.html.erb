@@ -1,2 +1,13 @@
-<h1>Exercises#edit</h1>
-<p>Find me in app/views/exercises/edit.html.erb</p>
+<div id="edit-app">
+  <h1>Edit Page for {{ exercise.name }}</h1>
+  <p>{{ exercise.name }}</p>
+  <p>Description:</p>
+    <ol>
+      <li v-for="description in exercise.descriptions">{{ description.note }}</li>
+    </ol>
+  <input type="checkbox"<%= 'checked' if @exercise.equipment %>>
+  <h3>Add a description:</h3>
+  <input v-model="newNote">
+  <h3>Add a Gif:</h3>
+  <input v-model="newImage">
+</div>

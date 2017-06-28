@@ -6,6 +6,7 @@
     <link id="target" href="/css/bootstrap.min.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Oswald:400,300' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Oxygen:400,300,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="/css/bootstrap.orange.min.css" type="text/css">
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
@@ -17,7 +18,7 @@
     <% flash.each do |name, message| %>
       <div class="alert alert-<%= name %> alert-dismissable" role="alert">
         <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h2><%= message %></h2>
+        <h4><%= message %></h4>
       </div>
     <% end %>
     <%= yield %>
