@@ -1,6 +1,6 @@
 class ExercisesController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
-  # before_action :validate_admin, except: [:index, :show]
+  before_action :validate_admin, except: [:index, :show]
 
   def index
     @exercises = Exercise.all

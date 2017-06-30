@@ -1,13 +1,21 @@
 <div id="edit-app">
   <h1>Edit Page for {{ exercise.name }}</h1>
+  <a href="/exercises">Back to exercises</a>
   <p>{{ exercise.name }}</p>
   <p>Description:</p>
     <ol>
-      <li v-for="description in exercise.descriptions">{{ description.note }}</li>
+      <li v-for="description in exercise.descriptions">{{ description.note }} || <button v-on:click="removeNote(description)">Delete Note</button></li>
     </ol>
-  <input type="checkbox"<%= 'checked' if @exercise.equipment %>>
+  <p>Needs Equipment: <i class="fa <%= @exercise.equipment ? 'fa-check-square-o' : 'fa-square-o' %>"></i></p>
   <h3>Add a description:</h3>
   <input v-model="newNote">
+  <button v-on:click="createNote()">Add Note</button>
+  <h2>Gifs:</h2>
+  <div class="exercise-image" v-for="image in exercise.images">
+    <img v-bind:src="image.url" alt="">
+    <button v-on:click="removeGif(image)">Remove Gif</button>
+  </div>
   <h3>Add a Gif:</h3>
   <input v-model="newImage">
+  <button v-on:click="createGif()">Add Gif</button>
 </div>

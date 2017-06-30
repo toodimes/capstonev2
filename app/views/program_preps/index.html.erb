@@ -1,3 +1,50 @@
-<h1>The index page for program prep</h1>
-<p>The program prep page for: <%= @client.user_profile.name %></p>
-<p><%= @client.user_profile.name %> has <%= @client.trainer.trainer_profile.name %> as their trainer.</p>
+<div id="index-pp-app">
+  <div class="container">
+    <div class="row">
+      <div class="program-cart text-center" data-spy="affix" data-offset-top="55">
+        <h1>
+          <span v-if="programPreps.length == 1">{{ programPreps.length }} Exercise</span>
+          <span v-if="programPreps.length > 1">{{ programPreps.length }} Exercises</span>
+        </h1>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="header-tag text-center">
+          <h4>Exercises in current program for <%= @user.user_profile.name %></h4>
+        </div>
+        <div class="col-md-4 col-lg-4 col-sm-4" v-for="exercise in programPreps" v-bind:key="exercise.id">
+             <div class="panel panel-hearts">
+               <div class="panel-heading text-center">
+                 <h4>{{ exercise.name }} || {{ exercise.quantity }} reps</h4>
+               </div>
+               <div class="panel-body">
+                  <p>Muscle: {{ exercise.muscle }}</p>
+                  <div class="panel-exercise-image text-center">
+                    <img class="img-responsive" :src="exercise.images[0].url" alt="">
+                    <hr>
+                  </div>
+                  <button class="" v-on:click="toggleInfo(exercise)" v-if="exercise.infoVisible">Hide Description</button>
+                  <button class="" v-on:click="toggleInfo(exercise)" v-else>View Description</button>
+                  <button class="pull-right" v-on:click="toggleUpdate(exercise)">Update Quantity</button>
+                  <div class="shown-info" v-if="exercise.infoVisible">
+                    <ol>
+                      <li v-for="description in exercise.descriptions">{{ description.note }}</li>
+                    </ol>
+                  </div>
+                  <div class="shown-info" v-if="exercise.updateVisible">
+                    <!-- <p>Quantity: {{ exercise.quantity }}</p> -->
+                    <p><input v-model="newQuantity" v-bind:placeholder="exercise.quantity"> <i v-on:click="updateQuantity(exercise)" class="fa fa-fighter-jet fa-3"></i></p>
+                  </div>
+               </div>
+               <!-- UNCOMMENT FOR PROGRAM PREP ADD -->
+             <div class="panel-footer pp-panel-footer text-center" v-on:click="removeExercise(exercise)">
+                <span><i class="fa fa-trash fa-6"></i></span>
+             </div>
+             </div>
+          </div>
+          <!--END V-FOR-->
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,11 +1,23 @@
-<h1>Goals#index</h1>
-<p>Find me in app/views/goals/index.html.erb</p>
-<% @goals.each do |goal| %>
-  <h3><%= goal.name %> <i class="fa <%= goal.completed ? 'fa-check-square-o' : 'fa-square-o' %>"></i> 
-  <% if current_user && current_user.id == goal.user.id || current_user && current_user.id == goal.user.trainer.id %>
-  || <a href="/user_profiles/<%= @user.id %>/goals/<%= goal.id %>/edit">Edit Goal</a> 
-  || <%= link_to("Mark Completed", "/user_profiles/#{@user.id}/goals/#{goal.id}", method: :delete) %>
+<div id="goal-app">
+  <h1>Goals#index</h1>
+  <p>Find me in app/views/goals/index.html.erb</p>
+  <% if current_user && current_user.id == @user.id || current_user && current_user.id == @user.trainer.id %>
+    <div class="add-goal">
+      <h3>New Goal: <textarea v-model="newGoal">{{ newGoal }}</textarea> <button v-on:click="addGoal()">Add Goal</button></h3>
+    </div>
   <% end %>
-  </h3>
+  <div class="goal-info" v-for="goal in userInfo.goals">
+    <h3 >{{ goal.name }}
+      <% if current_user && current_user.id == @user.id || current_user && current_user.id == @user.trainer.id %>
+        <span><i class="fa" v-bind:class="{ 'fa-square-o': !goal.completed }" v-if="goal.completed === false" v-on:click="markCompleted(goal)"></i>
+        <i class="fa" v-bind:class="{ 'fa-check-square-o': goal.completed }" v-if="goal.completed" v-on:click="markIncomplete(goal)"></i>
+        <i class="fa fa-trash" v-on:click="removeGoal(goal)"></i></span>
+      <% else %>
+        <span><i class="fa" v-bind:class="{ 'fa-square-o': !goal.completed }" v-if="goal.completed === false"></i>
+        <i class="fa" v-bind:class="{ 'fa-check-square-o': goal.completed }" v-if="goal.completed"></i></span>
+    <% end %>
+    </h3>
+    <hr>
+  </div>  
 
-<% end %>
+</div>

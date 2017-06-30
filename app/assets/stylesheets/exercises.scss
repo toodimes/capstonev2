@@ -2,6 +2,11 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 /* Vue.js fade */
+//Only uncomment below if you want to make the navbar fixed to the top
+// body {
+//   padding: 70px;
+// }
+
 .fade-enter-active, .fade-leave-active {
   transition: opacity .5s
 }
@@ -54,4 +59,37 @@
   width: 150px;
   height: 150px;
   margin: 15px;
+}
+.exercise-image {
+  margin-top: 25px;
+  max-width: 450px;
+  max-height: 450px;
+}
+.program-cart {
+  top: 25px;
+  z-index: 100;
+  border-radius: 5px;
+  background-color: #eaecef;
+  border: 1px solid #bd1550;
+  padding: 55px;
+}
+.affix {
+  opacity: .9;
+}
+// .program-cart + .col-md-12 {
+//   padding-top: 55px;
+// }
+.panel-exercise-image {
+  width: 100%;
+  overflow: hidden;
+}
+.pp-panel-footer:hover {
+  background-color: rgba(169,21,80,.6);
+  cursor: pointer;
+}
+.fa {
+  cursor: pointer;
+}
+.shown-info {
+  padding-top: 25px;
 }

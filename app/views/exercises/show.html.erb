@@ -5,6 +5,11 @@
 <% @exercise.exercise_images.each do |gif| %>
   <img src="<%= gif.url %>" alt="">
 <% end %>
-<% @exercise.descriptions.each do |desc| %>
-  <p><%= desc.note %></p>
+<ol>
+  <% @exercise.descriptions.each do |desc| %>
+    <li><%= desc.note %></li>
+  <% end %>
+</ol>
+<% if current_user && current_user.admin %>
+  <a href="/exercises/<%= @exercise.id %>/edit">Edit Exercise</a>
 <% end %>

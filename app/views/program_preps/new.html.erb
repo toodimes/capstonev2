@@ -1,6 +1,16 @@
-<div id="app">
- <div class="container">
+<div id="new-pp-app">
+   <div class="container">
    <div class="row">
+      <div class="program-cart text-center" data-spy="affix" data-offset-top="55">
+        <h1>
+          <span v-if="programPrepIDs.length < 1">Add an exercise to get started</span>
+          <span v-if="programPrepIDs.length == 1">{{ programPrepIDs.length }} Exercise</span>
+          <span v-if="programPrepIDs.length > 1">{{ programPrepIDs.length }} Exercises</span>
+          <button v-if="programPrepIDs.length >= 1" class="btn btn-lg btn-berry" v-on:click="viewProgram()"><i class="fa fa-space-shuttle fa-3"></i> View Program</button>
+        </h1>
+      </div>
+    </div>
+    <div class="row">
       <div class="col-md-12">
         <h4>Filter By Muscle: 
           <button v-on:click="setFilter('')" v-bind:class="{'active': this.searchFilter == ''}">All Exercises</button>
@@ -26,36 +36,37 @@
           </div>
         </div>
       </div>
-      <transition-group name="slide-fade">
-        <div class="col-md-4 col-lg-4" v-for="exercise in exercises" v-if="isSetMuscle(exercise)" v-bind:key="exercise.id">
-           <div class="panel panel-hearts">
-             <div class="panel-heading" v-on:click="setDescriptions(exercise)">
-               <a v-bind:href="'/exercises/' + exercise.id ">{{ exercise.name }}</a>
+    </div>
+    <div class="row">
+      <div class="col-md-12 col-lg-12 col-sm-12"> 
+        <transition-group name="slide-fade">
+          <div class="col-md-4 col-lg-4 col-sm-4" v-for="exercise in exercises" v-if="isSetMuscle(exercise)" v-bind:key="exercise.id">
+             <div class="panel panel-hearts">
+               <div class="panel-heading" v-on:click="setDescriptions(exercise)">
+                 <h3>{{ exercise.name }}</h3>
+               </div>
+               <div class="panel-body">
+                  <p>Muscle: {{ exercise.muscle }}</p>
+                  <div class="panel-exercise-image text-center">
+                    <img class="img-responsive" :src="exercise.images[0].url" alt="">
+                    <hr>
+                  </div>
+                  <div class="shown-info" v-if="exercise.infoVisible">
+                    <ol>
+                      <li v-for="description in exercise.descriptions">{{ description.note }}</li>
+                    </ol>
+                    
+                  </div>
+               </div>
+               <!-- UNCOMMENT FOR PROGRAM PREP ADD -->
+               <div class="panel-footer pp-panel-footer text-center" v-on:click="addToProgram(exercise)">
+                 <span><i class="fa fa-plus fa-3"></i></span>
+               </div>
              </div>
-             <div class="panel-body">
-                <p>Muscle: {{ exercise.muscle }}</p>
-                <div class="panel-exercise-image text-center">
-                  <img class="img-responsive" :src="exercise.images[0].url" alt="">
-                  <hr>
-                </div>
-                <div class="shown-info" v-if="exercise.infoVisible">
-                  <ol>
-                    <li v-for="description in exercise.descriptions">{{ description.note }}</li>
-                  </ol>
-                  
-                </div>
-             </div>
-             <!-- UNCOMMENT FOR PROGRAM PREP ADD -->
-             <!-- <div class="panel-footer pp-panel-footer text-center">
-               <span><i class="fa fa-plus fa-3"></i></span>
-             </div> -->
-             <div class="panel-footer pp-panel-footer text-center" v-on:click="setInfoVisible(exercise)">
-                Description
-             </div>
-           </div>
-        </div>
-        <!--END V-FOR-->
-      </transition-group>
+          </div>
+          <!--END V-FOR-->
+        </transition-group>
+      </div>
    </div>
  </div>
 </div>
