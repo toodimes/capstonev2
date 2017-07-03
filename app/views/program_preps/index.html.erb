@@ -6,6 +6,9 @@
           <span v-if="programPreps.length == 1">{{ programPreps.length }} Exercise</span>
           <span v-if="programPreps.length > 1">{{ programPreps.length }} Exercises</span>
         </h1>
+        <h2>
+          <button class="btn btn-cocktail btn-lg" v-on:click="createProgram()">Send program to <%= @user.user_profile.name %></button>
+        </h2>
       </div>
     </div>
     <div class="row">
@@ -13,28 +16,34 @@
         <div class="header-tag text-center">
           <h4>Exercises in current program for <%= @user.user_profile.name %></h4>
         </div>
-        <div class="col-md-4 col-lg-4 col-sm-4" v-for="exercise in programPreps" v-bind:key="exercise.id">
+        <div class="" v-for="exercise in programPreps" v-bind:key="exercise.id">
+          <div class="col-md-4 col-lg-4 col-sm-4">
              <div class="panel panel-hearts">
-               <div class="panel-heading text-center">
-                 <h4>{{ exercise.name }} || {{ exercise.quantity }} reps</h4>
+               <div class="panel-heading clearfix text-center">
+                <div class="panel-caption">
+                   <h4>{{ exercise.name }}</h4>
+                </div>
                </div>
                <div class="panel-body">
-                  <p>Muscle: {{ exercise.muscle }}</p>
-                  <div class="panel-exercise-image text-center">
-                    <img class="img-responsive" :src="exercise.images[0].url" alt="">
-                    <hr>
-                  </div>
-                  <button class="" v-on:click="toggleInfo(exercise)" v-if="exercise.infoVisible">Hide Description</button>
-                  <button class="" v-on:click="toggleInfo(exercise)" v-else>View Description</button>
-                  <button class="pull-right" v-on:click="toggleUpdate(exercise)">Update Quantity</button>
-                  <div class="shown-info" v-if="exercise.infoVisible">
-                    <ol>
-                      <li v-for="description in exercise.descriptions">{{ description.note }}</li>
-                    </ol>
-                  </div>
-                  <div class="shown-info" v-if="exercise.updateVisible">
-                    <!-- <p>Quantity: {{ exercise.quantity }}</p> -->
-                    <p><input v-model="newQuantity" v-bind:placeholder="exercise.quantity"> <i v-on:click="updateQuantity(exercise)" class="fa fa-fighter-jet fa-3"></i></p>
+                  <div class="slimScroller" style="height:250px; position: relative; overflow-y: scroll;" data-rail-visible="1" data-always-visible="1">
+                    <p>Muscle: {{ exercise.muscle }}</p>
+                    <div class="panel-exercise-image text-center">
+                      <img class="img-responsive" :src="exercise.images[0].url" alt="">
+                      <p>Trainer Note: {{ exercise.note }}</p>
+                      <hr>
+                    </div>
+                    <div class="btn-group btn-group-justified">
+                      <a class="btn btn-meadow" v-on:click="toggleNote(exercise)">Update Note</a>
+                      <!-- <a class="btn btn-meadow" v-on:click="toggleNote(exercise)" v-else>Change Note</a> -->
+                      <a class="btn btn-cocktail" v-on:click="toggleUpdate(exercise)">Change Quantity</a>
+                    </div>   
+                    <div class="shown-info text-center" v-if="exercise.infoVisible">
+                      <p><input v-model="newNote">    <button class="btn btn-lg btn-cocktail" v-on:click="updateNote(exercise)"><i  class="fa fa-fighter-jet fa-3"></i></button></p>
+                    </div>
+                    <div class="shown-info text-center" v-if="exercise.updateVisible">
+                      <!-- <p>Quantity: {{ exercise.quantity }}</p> -->
+                      <p><input v-model="newQuantity" v-bind:placeholder="exercise.quantity">    <button class="btn btn-lg btn-cocktail" v-on:click="updateQuantity(exercise)"><i  class="fa fa-fighter-jet fa-3"></i></button></p>
+                    </div>
                   </div>
                </div>
                <!-- UNCOMMENT FOR PROGRAM PREP ADD -->
@@ -43,7 +52,8 @@
              </div>
              </div>
           </div>
-          <!--END V-FOR-->
+        </div>
+        <!--END V-FOR-->
       </div>
     </div>
   </div>

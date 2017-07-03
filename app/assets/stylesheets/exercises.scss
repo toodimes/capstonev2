@@ -93,3 +93,9 @@
 .shown-info {
   padding-top: 25px;
 }
+.disabled {
+  opacity: .7;
+  cursor: not-allowed;
+  // pointer-events: none;
+
+}

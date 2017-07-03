@@ -10,6 +10,9 @@
   <p>Has Equipment: <%= @user.user_profile.equipment ? "Yes" : "No" %></p>
   <p>Has Paid: <%= @user.user_profile.paid ? "Yes" : "No" %></p>
   <p>Trainer: <a href="/trainer_profiles/<%= @user.trainer.id %>"><%= @user.trainer.trainer_profile.name %></a></p>
+  <% if current_user && current_user.id == @user.trainer.id %>
+    <a href="/user_profiles/<%= @user.id %>/program_preps/new">New Program</a>
+  <% end %>
   <% if @user.goals %>
     <h2><a href="/user_profiles/<%= @user.id %>/goals">Goals:</a></h2>
     <% @user.goals.each do |goal| %>

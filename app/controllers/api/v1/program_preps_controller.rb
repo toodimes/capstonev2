@@ -30,10 +30,18 @@ class Api::V1::ProgramPrepsController < ApplicationController
   def update
     @user = User.find_by(id: params[:user_profile_id])
     exercise = ProgramPrep.find_by(id: params[:id])
-    if params[:removeExercise]
-      exercise.update(status: "removed")
-    elsif params[:updateQuantity]
+    # if params[:removeExercise]
+    #   exercise.update(status: "removed")
+    if params[:updateQuantity]
       exercise.update(quantity: params[:quantity])
+    elsif params[:updateNote]
+      exercise.update(note: params[:note])
+    elsif params[:removeExercises]
+      program_preps = @user.program_preps.where(status: "stored")
+      # program_preps.update(status: "removed")
+      program_preps.each do |program_prep|
+        program_prep.update(status: "removed")
+      end
     end
     @program_preps = @user.program_preps.where(status: "stored").order(id: :asc)
     render :index

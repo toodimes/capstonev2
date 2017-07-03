@@ -12,9 +12,10 @@
     </div>
     <div class="row">
       <div class="col-md-12">
-        <h4>Filter By Muscle: 
-          <button v-on:click="setFilter('')" v-bind:class="{'active': this.searchFilter == ''}">All Exercises</button>
-        </h4>
+        <h1 class="btn btn-group-justified">
+          <a class="btn btn-cocktail" v-on:click="setFilter('')">All Exercises <i class="fa fa-globe fa-6"></i></a>
+          <a v-on:click="clearProgramPrepIDs()" class="btn btn-danger">Remove All Exercises <i class="fa fa-exclamation-triangle"></i></a>
+        </h1>
         <div class="images">
           <div class="muscle-img pull-left" v-on:click="setFilter('abs')" v-bind:class="{active: this.searchFilter == 'abs'}">
             <img class="img-rounded img-responsive" src="https://lh3.googleusercontent.com/XOizDmzHcO36GYA87QYfqsRmeTrSmijvaLu2zOiuQcYQdOYI0tpkECqGIvaZFjMy-Q=w170" alt="Abdominals">
@@ -40,7 +41,7 @@
     <div class="row">
       <div class="col-md-12 col-lg-12 col-sm-12"> 
         <transition-group name="slide-fade">
-          <div class="col-md-4 col-lg-4 col-sm-4" v-for="exercise in exercises" v-if="isSetMuscle(exercise)" v-bind:key="exercise.id">
+          <div class="col-md-4 col-lg-4 col-sm-4" v-for="exercise in exercises" v-if="isSetMuscle(exercise)" v-bind:key="exercise.id" v-bind:class="{ disabled: programPrepIDs.indexOf(exercise.id) !== -1 }">
              <div class="panel panel-hearts">
                <div class="panel-heading" v-on:click="setDescriptions(exercise)">
                  <h3>{{ exercise.name }}</h3>
@@ -59,8 +60,9 @@
                   </div>
                </div>
                <!-- UNCOMMENT FOR PROGRAM PREP ADD -->
-               <div class="panel-footer pp-panel-footer text-center" v-on:click="addToProgram(exercise)">
-                 <span><i class="fa fa-plus fa-3"></i></span>
+               <div class="panel-footer pp-panel-footer text-center" v-on:click="toggleProgram(exercise)">
+                 <span><i v-if="programPrepIDs.indexOf(exercise.id) === -1" class="fa fa-plus fa-3"></i></span>
+                 <span><i v-if="programPrepIDs.indexOf(exercise.id) !== -1" class="fa fa-trash fa-3"></i></span>
                </div>
              </div>
           </div>

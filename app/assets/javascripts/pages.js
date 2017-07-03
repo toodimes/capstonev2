@@ -169,6 +169,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
       message: '',
       programPreps: [],
       newQuantity: '',
+      newNote: '',
     },
     mounted: function() {
       $.get('/api/v1/user_profiles/' + this.userID + '/program_preps.json', function(result) {
@@ -177,7 +178,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     },
 
     methods: {
-      toggleInfo: function(programPrep) {
+      toggleNote: function(programPrep) {
         if (programPrep.updateVisible) {
           programPrep.updateVisible = false;
           programPrep.infoVisible = !programPrep.infoVisible;
@@ -216,6 +217,26 @@ document.addEventListener("DOMContentLoaded", function(event) {
           }
         });
       },
+      updateNote: function(programPrep) {
+        var that = this;
+        $.ajax({
+          url: '/api/v1/user_profiles/' + this.userID + '/program_preps/' + programPrep.id + '.json',
+          data: { updateNote: true, note: this.newNote },
+          type: 'PATCH',
+          success: function(result) {
+            that.programPreps = result;
+            that.newNote = '';
+          }
+        });
+      },
+      createProgram: function() {
+        var params = { createProgram: true };
+        $.post('/api/v1/user_profiles/' + this.userID + '/programs.json', params, function(result) {
+          // console.log(result.client_id);
+          // console.log(result.program_id);
+          window.location.href = '/user_profiles/' + result.client_id + '/programs/' + result.program_id;
+        });
+      },
 
     },
   });
@@ -228,10 +249,17 @@ document.addEventListener("DOMContentLoaded", function(event) {
       exercises: [],
       searchFilter: '',
       programPrepIDs: [],
+      programPrepNames: [],
     },
     mounted: function() {
       $.get('/api/v1/user_profiles/' + this.userID + '/program_preps/new.json', function(result) {
         this.exercises = result;
+      }.bind(this));
+      $.get('/api/v1/user_profiles/' + this.userID + '/program_preps.json', function(data) {
+        for (var i = 0; i < data.length; i++) {
+          this.programPrepIDs.push(data[i].exercise_id);
+          this.programPrepNames.push(data[i].name)
+        }
       }.bind(this));
     },
     methods: {
@@ -245,9 +273,16 @@ document.addEventListener("DOMContentLoaded", function(event) {
       setFilter: function(search) {
         this.searchFilter = search;
       },
-      addToProgram: function(exercise) {
-        if (this.programPrepIDs.indexOf(exercise) === -1) {
+      toggleProgram: function(exercise) {
+        if (this.programPrepIDs.indexOf(exercise.id) === -1) {
           this.programPrepIDs.push(exercise.id);
+          this.programPrepNames.push(exercise.name);
+          console.log(this.programPrepNames);
+        } else {
+          var index = this.programPrepIDs.indexOf(exercise.id);
+          var nameIndex = this.programPrepNames.indexOf(exercise.name);
+          this.programPrepIDs.splice(index, 1);
+          this.programPrepNames.splice(nameIndex, 1);
         }
       },
       viewProgram: function() {
@@ -260,8 +295,41 @@ document.addEventListener("DOMContentLoaded", function(event) {
         window.location.href = '/user_profiles/' + this.userID + '/program_preps';
         // console.log(params);
       },
+      clearProgramPrepIDs: function() {
+        if (confirm("Are you sure you would like to clear the program?") === true) {
+          var that = this;
+          $.ajax({
+            url: '/api/v1/user_profiles/' + this.userID + '/program_preps/clear_all.json',
+            data: { removeExercises: true },
+            type: 'PATCH',
+            success: function(result) {
+              that.programPreps = result;
+              that.newNote = '';
+              that.programPrepIDs = [];
+              that.programPrepNames = [];
+            }
+          });
+        }
+      },
+
 
     }
+  });
+
+  var app6 = new Vue({
+    el: '#show-p-app',
+    data: {
+      userID: window.location.pathname.match(/\d+/)[0],
+      programID: window.location.pathname.split("/").slice(-1)[0],
+      message: 'Hello worlds!',
+      program: [],
+    },
+    mounted: function() {
+      $.get('/api/v1/user_profiles/' + this.userID + '/programs/' + this.programID + '.json', function(result) {
+        this.program = result;
+      }.bind(this));      
+    },
+
   });
 
 });
