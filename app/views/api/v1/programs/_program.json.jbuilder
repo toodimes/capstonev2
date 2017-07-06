@@ -3,6 +3,8 @@ json.client_id program.user.id
 json.client program.user.user_profile.name
 # json.trainer_id program.user.trainer.id
 json.trainer_name program.user.trainer.trainer_profile.name
+json.trainer_id program.user.trainer.id
+json.create_date program.created_at.strftime("%b %d, %Y")
 json.infoVisible false
 json.exercises program.program_preps.each do |program_prep|
   # json.exercise_id program_prep.exercise.id

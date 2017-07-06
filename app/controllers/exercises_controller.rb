@@ -3,6 +3,8 @@ class ExercisesController < ApplicationController
   before_action :validate_admin, except: [:index, :show]
 
   def index
+    gon.api = ENV['API_KEY']
+    # gon.hi = "Hello"
     @exercises = Exercise.all
   end
 
@@ -17,6 +19,7 @@ class ExercisesController < ApplicationController
   end
 
   def edit
+    gon.api = ENV['API_KEY']
     @exercise = Exercise.find_by(id: params[:id])
   end
 

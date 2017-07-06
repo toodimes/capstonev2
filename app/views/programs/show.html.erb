@@ -1,17 +1,17 @@
 <div id="show-p-app">
   <div class="container">
     <div class="row">
-      <h1>Program for <a :href='"/user_profiles/" + program.client_id'>{{ program.client }}</a> || <button class="btn btn-hearts">View All Programs</button></h1>
+      <h1>Program for <a v-bind:href="'/user_profiles/' + userID">{{ program.client }}</a> || <a :href="'/user_profiles/' + userID + '/programs'"><button class="btn btn-hearts">View All Programs</button></a></h1>
       <div class="col-md-12">
         <div class="col-md-6 col-lg-6 col-sm-6" v-for="exercise in program.exercises">
-          <div class="panel panel-meadow">
+          <div class="panel panel-hearts">
             <div class="panel-heading clearfix text-center">
               <div class="panel-caption">
                 <h4>{{ exercise.name }}</a></h4>
               </div>
             </div>
             <div class="panel-body">
-              <div class="slimScroller" style="height:450px; position: relative; overflow-y: scroll;" data-rail-visible="1" data-always-visible="1">
+              <div class="slimScroller" style="height:450px; position: relative; overflow-y: scroll;" data-rail-visible="1" data-always-visible="0">
                 
                 <p>{{ exercise.muscle }}</p>
                 <div class="panel-exercise-image" v-for="image in exercise.images">

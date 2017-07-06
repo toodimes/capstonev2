@@ -1,6 +1,5 @@
 class Api::V1::ExercisesController < ApplicationController
-  before_action :validate_admin!, only: [:update]
-
+  # before_action :validate_admin!, only: [:update]
   def index
     @exercises = Exercise.all
     render :index

@@ -1,2 +1,47 @@
-<h1>Programs#index</h1>
-<p>Find me in app/views/programs/index.html.erb</p>
+<div id="index-p-app">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 col-lg-12">
+        <div class="panel panel-hearts">
+          <div class="panel-heading text-center">
+            <h2>Program for <a :href="'/user_profiles/' + userID ">{{ firstProgram.client }}</a> prepared by <a :href="'/trainer_profiles/' + firstProgram.trainer_id">{{ firstProgram.trainer_name }}</a></h2>  
+          </div>
+          <div class="panel-body">
+            <div class="col-md-6 col-lg-6" v-for="exercise in firstProgram.exercises">
+              <div class="panel-caption">
+                <h4>{{ exercise.name }} || {{ exercise.quantity }}reps</h4>
+              </div>
+              <div class="slimScroller" style="height:450px; position: relative; overflow-y: scroll;" data-rail-visible="1" data-always-visible="0">
+                <div class="btn-group btn-group-justified">
+                  <a href="" class="btn btn-berry">{{ exercise.muscle }}</a>
+                  <a href="" class="btn btn-meadow">{{ exercise.trainer_note }}</a>
+                </div>
+                <!-- <p>Muscle: {{ exercise.muscle }}. Trainer Note: {{ exercise.trainer_note }}</p> -->
+                <div class="panel-exercise-image" v-for="image in exercise.images">
+                  <img class="img-rounded img-responsive" :src="image.image" alt="">
+                </div>
+                <div class="shown-info">
+                  <ol>
+                    <li v-for="description in exercise.descriptions">{{ description.note }}</li>
+                  </ol>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="panel-footer text-center">
+            Message {{ firstProgram.trainer_name }}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-4 col-md-4 col-lg-4" v-for="program in remainingPrograms">
+        <div class="panel panel-meadow">
+          <div class="panel-heading button-panel" v-on:click="goToProgram(program)">
+            <h3>Program from {{ program.create_date }}</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

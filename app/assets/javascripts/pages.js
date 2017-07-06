@@ -1,7 +1,7 @@
 /* global Vue */
 /* global $ */
 //All the vue code will be stored in this file
-document.addEventListener("DOMContentLoaded", function(event) { 
+document.addEventListener("DOMContentLoaded", function(event) {
   var app = new Vue({
     el: '#app',
     data: {
@@ -48,17 +48,17 @@ document.addEventListener("DOMContentLoaded", function(event) {
     },
     methods: {
       createNote: function() {
-        var that = this;
-        // var params = {note: this.newNote};
-        $.ajax({
-          url: "/api/v1/exercises/" + this.exerciseID + ".json",
-          data: { note: this.newNote, createNote: true },
-          type: 'PATCH',
-          success: function(result) {
-            that.exercise = result;
-            that.newNote = '';
-          }
-        });
+        // var that = this;
+        // // var params = {note: this.newNote};
+        // $.ajax({
+        //   url: "/api/v1/exercises/" + this.exerciseID + ".json",
+        //   data: { note: this.newNote, createNote: true },
+        //   type: 'PATCH',
+        //   success: function(result) {
+        //     that.exercise = result;
+        //     that.newNote = '';
+        //   }
+        // });
       },
 
       createGif: function() {
@@ -232,8 +232,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
       createProgram: function() {
         var params = { createProgram: true };
         $.post('/api/v1/user_profiles/' + this.userID + '/programs.json', params, function(result) {
-          // console.log(result.client_id);
-          // console.log(result.program_id);
           window.location.href = '/user_profiles/' + result.client_id + '/programs/' + result.program_id;
         });
       },
@@ -277,7 +275,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
         if (this.programPrepIDs.indexOf(exercise.id) === -1) {
           this.programPrepIDs.push(exercise.id);
           this.programPrepNames.push(exercise.name);
-          console.log(this.programPrepNames);
         } else {
           var index = this.programPrepIDs.indexOf(exercise.id);
           var nameIndex = this.programPrepNames.indexOf(exercise.name);
@@ -286,20 +283,19 @@ document.addEventListener("DOMContentLoaded", function(event) {
         }
       },
       viewProgram: function() {
-        // console.log(this.programPreps);
         var params = {
           program_prep_ids: this.programPrepIDs,
         };
         $.post('/api/v1/user_profiles/' + this.userID + '/program_preps.json', params, function(result) {
         });
         window.location.href = '/user_profiles/' + this.userID + '/program_preps';
-        // console.log(params);
       },
       clearProgramPrepIDs: function() {
         if (confirm("Are you sure you would like to clear the program?") === true) {
           var that = this;
           $.ajax({
             url: '/api/v1/user_profiles/' + this.userID + '/program_preps/clear_all.json',
+            headers: {},
             data: { removeExercises: true },
             type: 'PATCH',
             success: function(result) {
@@ -330,6 +326,27 @@ document.addEventListener("DOMContentLoaded", function(event) {
       }.bind(this));      
     },
 
+  });
+
+  var app7 = new Vue({
+    el: '#index-p-app',
+    data: {
+      userID: window.location.pathname.match(/\d+/)[0],
+      firstProgram: [],
+      remainingPrograms: [],
+    },
+    mounted: function() {
+      $.get('/api/v1/user_profiles/' + this.userID + '/programs.json', function(result) {
+        this.remainingPrograms = result;
+        this.firstProgram = result[0];
+        this.remainingPrograms.splice(0, 1);
+      }.bind(this));
+    },
+    methods: {
+      goToProgram: function(program) {
+        window.location.href = '/user_profiles/' + this.userID + '/programs/' + program.program_id;
+      },
+    },
   });
 
 });

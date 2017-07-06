@@ -17,7 +17,7 @@
           <h4>Exercises in current program for <%= @user.user_profile.name %></h4>
         </div>
         <div class="" v-for="exercise in programPreps" v-bind:key="exercise.id">
-          <div class="col-md-4 col-lg-4 col-sm-4">
+          <div class="col-md-6 col-lg-6 col-sm-6">
              <div class="panel panel-hearts">
                <div class="panel-heading clearfix text-center">
                 <div class="panel-caption">
@@ -25,7 +25,7 @@
                 </div>
                </div>
                <div class="panel-body">
-                  <div class="slimScroller" style="height:250px; position: relative; overflow-y: scroll;" data-rail-visible="1" data-always-visible="1">
+                  <div class="slimScroller" style="height:450px; position: relative; overflow-y: scroll;" data-rail-visible="1" data-always-visible="1">
                     <p>Muscle: {{ exercise.muscle }}</p>
                     <div class="panel-exercise-image text-center">
                       <img class="img-responsive" :src="exercise.images[0].url" alt="">

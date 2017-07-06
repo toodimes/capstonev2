@@ -41,7 +41,7 @@
     <div class="row">
       <div class="col-md-12 col-lg-12 col-sm-12"> 
         <transition-group name="slide-fade">
-          <div class="col-md-4 col-lg-4 col-sm-4" v-for="exercise in exercises" v-if="isSetMuscle(exercise)" v-bind:key="exercise.id" v-bind:class="{ disabled: programPrepIDs.indexOf(exercise.id) !== -1 }">
+          <div class="col-md-6 col-lg-6 col-sm-6" v-for="exercise in exercises" v-if="isSetMuscle(exercise)" v-bind:key="exercise.id" v-bind:class="{ disabled: programPrepIDs.indexOf(exercise.id) !== -1 }">
              <div class="panel panel-hearts">
                <div class="panel-heading" v-on:click="setDescriptions(exercise)">
                  <h3>{{ exercise.name }}</h3>

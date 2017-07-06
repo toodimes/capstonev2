@@ -96,6 +96,9 @@
 .disabled {
   opacity: .7;
   cursor: not-allowed;
-  // pointer-events: none;
-
+}
+.button-panel:hover {
+  background-color: #abc013;
+  border-color: #abc013;
+  cursor: pointer;
 }

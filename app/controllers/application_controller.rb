@@ -1,12 +1,15 @@
 class ApplicationController < ActionController::Base
-  protect_from_forgery with: :null_session
+  protect_from_forgery with: :exception
 
-  # def restrict_access
-  #   authenticate_or_request_with_http_token do |api_key, options|
-  #     User.find_by(api_key: api_key, email: request.headers['X-User-Email'])
-  #     # true
-  #   end
-  # end
+  def restrict_access
+    authenticate_or_request_with_http_token do |api_key, options|
+      ENV["API_KEY"] == api_key
+      # User.find_by(api_key: api_key, email: request.headers['X-User-Email'])
+      # true
+    end
+  end
+
+
 
   def validate_trainer
     unless current_user && current_user.is_trainer

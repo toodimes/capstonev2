@@ -27,12 +27,13 @@
         </div>
       </div>
       <transition-group name="slide-fade">
-        <div class="col-md-4 col-lg-4" v-for="exercise in exercises" v-if="isSetMuscle(exercise)" v-bind:key="exercise.id">
+        <div class="col-md-6 col-lg-6" v-for="exercise in exercises" v-if="isSetMuscle(exercise)" v-bind:key="exercise.id">
            <div class="panel panel-hearts">
              <div class="panel-heading" v-on:click="setDescriptions(exercise)">
                <a v-bind:href="'/exercises/' + exercise.id ">{{ exercise.name }}</a>
              </div>
              <div class="panel-body">
+               <div class="slimScroller" style="height:400px; position: relative; overflow-y: scroll;" data-rail-visible="1" data-always-visible="0">
                 <p>Muscle: {{ exercise.muscle }}</p>
                 <div class="panel-exercise-image text-center">
                   <img class="img-responsive" :src="exercise.images[0].url" alt="">
@@ -41,9 +42,9 @@
                 <div class="shown-info" v-if="exercise.infoVisible">
                   <ol>
                     <li v-for="description in exercise.descriptions">{{ description.note }}</li>
-                  </ol>
-                  
+                  </ol>                  
                 </div>
+              </div>
              </div>
              <!-- UNCOMMENT FOR PROGRAM PREP ADD -->
              <!-- <div class="panel-footer pp-panel-footer text-center">
@@ -56,6 +57,7 @@
         </div>
         <!--END V-FOR-->
       </transition-group>
+
    </div>
  </div>
 </div>

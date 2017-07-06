@@ -23,7 +23,7 @@ gem 'coffee-rails', '~> 4.2'
 gem 'devise'
 
 gem 'dotenv-rails'
-
+gem 'gon'
 gem 'faker'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
