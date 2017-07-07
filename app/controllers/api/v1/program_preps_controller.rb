@@ -1,4 +1,5 @@
 class Api::V1::ProgramPrepsController < ApplicationController
+  before_action :restrict_access
 
   def index
     @user = User.find_by(id: params[:user_profile_id])

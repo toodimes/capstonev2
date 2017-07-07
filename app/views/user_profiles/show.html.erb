@@ -4,6 +4,7 @@
   <%= image_tag "#{@user.avatars.last.url}", class: "media-object avatar" %>
   <% if current_user && current_user.id == @user.id %>
     <p><a href="/avatars/new">Edit Avatar</a></p>
+    <p><a href="/user_profiles/<%= @user.id %>/programs">View Programs</a></p>
   <% end %>
   <p>Name: <%= @user.user_profile.name %></p>
   <p>Gender: <%= @user.user_profile.gender.capitalize %></p>
@@ -12,6 +13,7 @@
   <p>Trainer: <a href="/trainer_profiles/<%= @user.trainer.id %>"><%= @user.trainer.trainer_profile.name %></a></p>
   <% if current_user && current_user.id == @user.trainer.id %>
     <a href="/user_profiles/<%= @user.id %>/program_preps/new">New Program</a>
+    <a href="/user_profiles/<%= @user.id %>/programs">View Programs</a>
   <% end %>
   <% if @user.goals %>
     <h2><a href="/user_profiles/<%= @user.id %>/goals">Goals:</a></h2>

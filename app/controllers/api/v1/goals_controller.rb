@@ -1,5 +1,6 @@
 class Api::V1::GoalsController < ApplicationController
   # before_action :validate_user_or_trainer! only: [:create, :update, :destroy]
+  before_action :restrict_access
 
   def index
     @user = User.find_by(id: params[:user_profile_id])

@@ -1,4 +1,6 @@
 class UserProfilesController < ApplicationController
+  before_action :set_gon
+  
   def index
     @users = User.where.not(trainer_id: nil).order(id: :asc)
   end

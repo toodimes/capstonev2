@@ -1,10 +1,9 @@
 class ExercisesController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   before_action :validate_admin, except: [:index, :show]
+  before_action :set_gon
 
   def index
-    gon.api = ENV['API_KEY']
-    # gon.hi = "Hello"
     @exercises = Exercise.all
   end
 

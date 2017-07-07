@@ -1,5 +1,6 @@
 class Api::V1::ProgramsController < ApplicationController
-
+  before_action :restrict_access
+  
   def index
     @programs = Program.where(user_id: params[:user_profile_id]).order(id: :desc)
     render :index

@@ -1,4 +1,6 @@
 class TrainerProfilesController < ApplicationController
+  before_action :set_gon
+  
   def index
     @trainers = User.where(trainer_id: nil).order(id: :asc)
   end
