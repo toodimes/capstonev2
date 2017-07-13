@@ -1,6 +1,5 @@
 <div id="goal-app">
-  <h1>Goals#index</h1>
-  <p>Find me in app/views/goals/index.html.erb</p>
+  <h1>{{ currentUserName }}</h1>
   <% if current_user && current_user.id == @user.id || current_user && current_user.id == @user.trainer.id %>
     <div class="add-goal">
       <h3>New Goal: <textarea v-model="newGoal">{{ newGoal }}</textarea> <button v-on:click="addGoal()">Add Goal</button></h3>

@@ -5,6 +5,7 @@
   <% if current_user && current_user.id == @user.id %>
     <p><a href="/avatars/new">Edit Avatar</a></p>
     <p><a href="/user_profiles/<%= @user.id %>/programs">View Programs</a></p>
+    <p><a href="/messages">Messages</a></p>
   <% end %>
   <p>Name: <%= @user.user_profile.name %></p>
   <p>Gender: <%= @user.user_profile.gender.capitalize %></p>

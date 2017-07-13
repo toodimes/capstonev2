@@ -1,10 +1,12 @@
 /* global Vue */
 /* global $ */
+/* Latest app is 8 in messages */
 //All the vue code will be stored in this file
 document.addEventListener("DOMContentLoaded", function(event) {
   var app3 = new Vue({
     el: '#goal-app',
     data: {
+      currentUserName: gon.currentUser,
       userID: window.location.pathname.match(/\d+/)[0],
       message: "",
       userInfo: [],
@@ -85,6 +87,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
   var app6 = new Vue({
     el: '#show-p-app',
     data: {
+      currentUserName: gon.currentUser,
       userID: window.location.pathname.match(/\d+/)[0],
       programID: window.location.pathname.split("/").slice(-1)[0],
       message: 'Hello worlds!',
@@ -111,6 +114,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     el: '#index-p-app',
     data: {
       userID: window.location.pathname.match(/\d+/)[0],
+      currentUserName: gon.currentUser,
       firstProgram: [],
       remainingPrograms: [],
     },

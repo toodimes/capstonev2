@@ -1,0 +1,91 @@
+<div id="messages-show-app">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-2 col-sm-2 col-lg-2">
+        <div class="panel panel-meadow">
+          <div class="panel-heading">
+            <div class="panel-title">
+              <% if @sender.user_profile %>
+                <h2><%= @sender.user_profile.name %></h2>
+              <% else %>
+                <h2><%= @sender.trainer_profile.name %></h2>
+              <% end %>
+            </div>
+          </div>
+          <div class="panel-body">
+            <img class="img-circle img-responsive" :src="fellowUserAvatar" alt="">
+            <% if @sender && @sender.is_trainer && @sender.id == current_user.trainer_id %>
+              <h2>Your Current Trainer: Yes</h2>
+            <% end %>
+          </div>
+        </div>
+      </div> <!-- END COL-MD-2 -->
+      <div class="col-md-8 col-sm-8 col-lg-8">
+        <div class="panel panel-hearts">
+          <div class="panel-heading">
+            <h3 class="panel-title">{{ message }}{{ fellowUserName }}</h3>
+          </div> <!-- END PANEL HEADING -->
+          <div class="panel-body" >
+            <template v-for="message in messages">
+              <template v-if="message.recipient_id !== currentUserID">
+                <div class="valign" >
+                  <!-- <div class="cell-1-5">
+                    <img class="img-circle img-responsive" :src="message.recipient_avatar" alt="">
+                  </div> --> <!-- END CELL-1-5 -->
+                  <div class="popover popover-block left" >
+                    <div class="arrow"></div>
+                    <div class="popover-content">
+                      <span>{{ message.content }}</span> <i v-on:click="removeMessage(message)" class="fa fa-trash pull-right"></i>
+                    </div> <!-- END POPOVER-CONTENT -->
+                  </div> <!-- END POPOVER -->
+                </div> <!-- END VALIGN -->
+              </template>
+              <template v-else>
+                <div class="valign">
+                  <div class="popover popover-block message-content right" >
+                    <div class="arrow"></div>
+                    <div class="popover-content">
+                      <span>{{ message.content }}</span>
+                    </div>
+                  </div>
+                  <!-- div class="cell-1-5">
+                    <img class="img-circle img-responsive" :src="message.recipient_avatar" alt="">
+                  </div> -->
+                </div>
+              </template>
+            </template> <!-- END V-FOR -->
+            <div class="valign">
+              <div class="popover popover-block left">
+                <div class="arrow"></div>
+                <div class="popover-content">
+                  <h2><input style="width: 100%;" v-model="newMessageContent" v-on:keyup.enter="sendNewMessage()"></h2>
+                </div>
+              </div>
+              <div class="cell-1-5">
+                <img class="img-circle img-responsive" :src="currentUserAvatar" alt="">
+              </div>
+            </div>
+            </div>
+            <div class="panel-footer text-center" v-on:click="sendNewMessage()">
+              <span><i class="fa fa-paper-plane"></i></span>
+            </div>
+          </div>
+        </div>
+      <div class="col-md-2 col-sm-2 col-lg-2">
+        <div class="panel panel-meadow">
+          <div class="panel-heading">
+            <div class="panel-title">
+              <h3>{{ currentUserName }}</h3>
+            </div>
+          </div>
+          <div class="panel-body">
+            <img class="img-circle img-responsive" :src="currentUserAvatar" alt="">
+            <% if current_user && current_user.trainer %>
+              <h2>Trainer: Yes</h2>
+            <% end %>
+          </div>
+        </div>
+      </div> <!-- END COL-MD-2 -->
+    </div>
+  </div>
+</div>

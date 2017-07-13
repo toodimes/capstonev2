@@ -33,6 +33,8 @@ Rails.application.routes.draw do
         resources :program_preps, except: [:edit, :show]
         resources :programs, except: [:new, :edit]
       end
+      resources :trainer_profiles
+      resources :messages, except: [:update, :edit]
     end
   end
 
@@ -41,7 +43,8 @@ Rails.application.routes.draw do
     resources :program_preps, only: [:index, :new]
     resources :programs, only: [:index, :show]
   end
-  resources :trainer_profiles, except: [:create]
+  resources :trainer_provfiles, except: [:create]
+  resources :messages, only: [:index, :show]
   resources :exercises
 
 end
