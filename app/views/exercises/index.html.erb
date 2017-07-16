@@ -28,7 +28,7 @@
       </div>
       <transition-group name="slide-fade">
         <div class="col-md-6 col-lg-6" v-for="exercise in exercises" v-if="isSetMuscle(exercise)" v-bind:key="exercise.id">
-           <div class="panel panel-hearts">
+           <div class="panel panel-success">
              <div class="panel-heading" v-on:click="setDescriptions(exercise)">
                <a v-bind:href="'/exercises/' + exercise.id ">{{ exercise.name }}</a>
              </div>

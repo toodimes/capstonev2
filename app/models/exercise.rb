@@ -2,8 +2,9 @@ class Exercise < ApplicationRecord
   belongs_to :muscle
   has_many :exercise_images
   has_many :descriptions
-
   after_create :assign_addons
+
+  validates :name, :presence => true
 
   def assign_addons
     ExerciseImage.create(exercise_id: self.id)

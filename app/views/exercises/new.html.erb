@@ -1,0 +1,27 @@
+<div class="container">
+  <div class="row">
+    <h1>Add a new exercise</h1>
+    <% if @exercise && @exercise.errors.any? %>
+      <h3><%= pluralize(@exercise.errors.count, "error") %> stopped this exercise from being added:</h3>
+      <% @exercise.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    <% end %>
+    <%= form_tag "/exercises", method: :post do %>
+      <h2><input type="text" name="name" value="<%= @exercise.name %>"></h2>
+      <section>
+        <h3>Equipment Required
+          <input type="checkbox" name="equipment[]">
+        </h3>
+      </section>
+      <section>
+        <select name="muscle_id">
+          <% @muscles.each do |muscle| %>
+            <option value="<%= muscle.id %>"><%= muscle.name %></option>
+          <% end %>
+        </select>
+      </section>
+      <button type="submit">Add the exercise!</button>
+    <% end %>
+  </div>
+</div>

@@ -12,9 +12,25 @@ class ExercisesController < ApplicationController
   end
 
   def new
+    @muscles = Muscle.all
+    @exercise = Exercise.new(name: "Exercise Name", equipment: false, muscle_id: 1)
+    render "new.html.erb"
   end
 
   def create
+    if params[:equipment]
+      equipment = true
+    else
+      equipment = false
+    end
+    @exercise = Exercise.new(name: params[:name], equipment: equipment, muscle_id: params[:muscle_id])
+    if @exercise.save
+      render "show.html.erb"
+    else
+      @muscles = Muscle.all
+      flash[:danger] = "Something went wrong, please try again."
+      render "new.html.erb"
+    end
   end
 
   def edit

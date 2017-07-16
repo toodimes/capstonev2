@@ -15,7 +15,7 @@
           <div class="panel-body">
             <img class="img-circle img-responsive" :src="fellowUserAvatar" alt="">
             <% if @sender && @sender.is_trainer && @sender.id == current_user.trainer_id %>
-              <h2>Your Current Trainer: Yes</h2>
+              <h2>Your Current Trainer</h2>
             <% end %>
           </div>
         </div>
@@ -80,9 +80,6 @@
           </div>
           <div class="panel-body">
             <img class="img-circle img-responsive" :src="currentUserAvatar" alt="">
-            <% if current_user && current_user.trainer %>
-              <h2>Trainer: Yes</h2>
-            <% end %>
           </div>
         </div>
       </div> <!-- END COL-MD-2 -->
