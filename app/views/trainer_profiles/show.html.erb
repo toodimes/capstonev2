@@ -2,6 +2,9 @@
 <% if current_user && current_user.id == @trainer.id %>
   <p><a href="/avatars/new">Edit Avatar</a></p>
 <% end %>
+<% if current_user && current_user.admin %>
+  <button><a href="/exercises/new">Add an exercise</a></button>
+<% end %>
 <h2><%= @trainer.trainer_profile.name %></h2>
 <p>Gender: <%= @trainer.trainer_profile.gender.capitalize %></p>
 <p>Experience: <%= @trainer.trainer_profile.experience %></p>

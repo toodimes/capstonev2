@@ -7,6 +7,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     el: '#index-pp-app',
     data: {
       userID: window.location.pathname.match(/\d+/)[0],
+      currentUserName: gon.currentUser,
       message: '',
       programPreps: [],
       newQuantity: '',
@@ -105,6 +106,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     el: '#new-pp-app',
     data: {
       userID: window.location.pathname.match(/\d+/)[0],
+      currentUserName: gon.currentUser,
       message: 'Hello worldly!',
       exercises: [],
       searchFilter: '',

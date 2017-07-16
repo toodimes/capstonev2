@@ -41,6 +41,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     el: "#edit-exercise-app",
     data: {
       exerciseID: window.location.pathname.match(/\d+/)[0],
+      currentUserName: gon.currentUser,
       message: '',
       exercise: [],
       newNote: '',

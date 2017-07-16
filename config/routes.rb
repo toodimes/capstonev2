@@ -3,21 +3,6 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   devise_scope :user do
     get 'logout', to: 'devise/sessions#destroy'
-
-    #MESSAGES ROUTES
-    get "/users/:user_id/messages" => "messages#index"
-    get "/users/:user_id/messages/new" => "messages#new"
-    get "/users/:user_id/messages/:id" => "messages#show"
-    post "/users/:user_id/messages" => "messages#create"
-    get "/users/:user_id/messages/:id/edit" => "messages#edit"
-    patch "/users/:user_id/messages/:id" => "messages#update"
-    delete "/users/:user_id/messages" => "messages#destroy"
-    #PROGRAM PREP ROUTES
-    # get "/users/:user_id/program_preps" => "program_preps#index"
-    # get "/users/:user_id/program_preps/new" => "program_preps#new"
-    # #PROGRAM ROUTES
-    # get "/users/:user_id/programs" => "programs#index"
-    # get "/users/:user_id/programs/:id" => "programs#show"
   end
 
   
@@ -27,12 +12,14 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      resources :exercises, except: [:new, :destroy, :create]
+      resources :exercises, except: [:new, :create, :destroy]
       resources :user_profiles do
         resources :goals, except: [:new, :show, :edit]
         resources :program_preps, except: [:edit, :show]
         resources :programs, except: [:new, :edit]
       end
+      resources :trainer_profiles
+      resources :messages, except: [:update, :edit]
     end
   end
 
@@ -42,6 +29,7 @@ Rails.application.routes.draw do
     resources :programs, only: [:index, :show]
   end
   resources :trainer_profiles, except: [:create]
+  resources :messages, only: [:index, :show]
   resources :exercises
 
 end

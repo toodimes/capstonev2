@@ -11,6 +11,15 @@ class ApplicationController < ActionController::Base
 
   def set_gon
     gon.api = ENV['API_KEY']
+    if current_user && current_user.is_trainer || current_user && current_user.trainer_application
+      gon.currentUser = current_user.trainer_profile.name
+      gon.currentUserID = current_user.id
+      gon.currentUserAvatar = current_user.avatars.last.url      
+    elsif current_user
+      gon.currentUser = current_user.user_profile.name
+      gon.currentUserID = current_user.id
+      gon.currentUserAvatar = current_user.avatars.last.url
+    end
   end
 
   def validate_trainer
