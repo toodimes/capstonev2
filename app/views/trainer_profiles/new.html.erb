@@ -1,3 +1,70 @@
-<h1>TrainerProfiles#new</h1>
-<p>Find me in app/views/trainer_profiles/new.html.erb</p>
-<%= render "form", form_method: :patch, url: "/trainer_profiles/#{@trainer.id}", heading: "Lets get some trainer information", submit_message: "Submit" %>
+<%# render "form", form_method: :patch, url: "/trainer_profiles/#{@trainer.id}", heading: "Lets get some trainer information", submit_message: "Submit" %>
+<!-- <div id="edit-trainer-profile-app">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12">
+        <h2>{{ message }}</h2>
+        <div class="checkout-wrapper">
+          <div class="row">
+            <div class="col-xs-12 col-sm-6">
+              <transition name="fade" mode="out-in">
+                <template v-if="showTop">
+                  <div v-bind:key="showTop">
+                    <h3>Profile Information</h3>
+                    <div class="row">
+                      <div class="col-xs-12">
+                        <label>Name: </label>
+                        <input type="text" v-model="newName">
+                      </div>
+                      <div class="col-xs-12">
+                        <label>Gender: </label>
+                        <input type="radio" value="male" v-model="newGender"> Male 
+                        <input type="radio" value="female" v-model="newGender"> Female
+                      </div>
+                      <div class="col-xs-12">
+                        <label>Bio: </label>
+                        <textarea v-model="newBio" style="width: 100%;" rows="5"></textarea>
+                      </div>
+                      <div class="col-xs-12">
+                        <label>Avatar: </label>
+                        <input type="text" v-model="newAvatar">
+                      </div>
+                    </div>
+                    <button class="btn btn-lg btn-success" style="width: 100%" v-on:click="saveInfo()">Save Info</button>
+                  </div>
+                </template> --><!-- END SHOWTOP -->
+<!--                 <template v-if="showExperience">
+                  <div v-bind:key="showExperience">
+                    <h3>Add Experience</h3>
+                    <div class="col-xs-12">
+                      <label>Start Date:</label>
+                      <input type="date" v-model="newExperienceStartDate" style="width: 100%">
+                    </div>
+                    <div class="col-xs-12">
+                      <label>End Date:</label>
+                      <input type="date" v-model="newExperienceEndDate" style="width: 100%">
+                    </div>
+                  </div>
+                </template><!-- END SHOWEXPERIENCE -->
+              </transition>
+            </div>
+            <div class="col-xs-12 col-sm-6">
+              <h3>Profile Preview</h3>
+              <div class="row">
+                <div class="col-xs-12 text-center">
+                  <img class="img-responsive" :src="newAvatar" alt="">
+                </div>
+                <div class="col-xs-12 text-center">
+                  <h2>{{ newName }}</h2>
+                </div>
+                <div class="col-xs-12 text-center">
+                  <p>{{ newBio }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->

@@ -140,7 +140,7 @@ h1, h2, h3, h4, h5, h6, p {
 	color: #fff;
 }
 h1 {
-	color: #fff;
+	color: #12212d;
 	font-weight: 300;
 	text-transform: uppercase;
 	font-size: 80px;
@@ -2372,7 +2372,7 @@ a.collapsed {
 .alert { border-radius: 0; }
 .popover {
 	background: #2bb7ff;
-	color: #fff;
+	color: #4286f4;
 }
 .popover-title { background: #fff; }
 .popover.left > .arrow:after {

@@ -11,14 +11,16 @@ document.addEventListener("DOMContentLoaded", function(event) {
     },
     mounted: function() {
       var that = this;
-      $.ajax({
-        url: '/api/v1/exercises.json',
-        headers: { "Authorization": 'Token token=' + gon.api },
-        type: 'GET',
-        success: function(result) {
-          that.exercises = result;
-        }
-      });
+      if (window.location.pathname.includes("/exercises")) {
+        $.ajax({
+          url: '/api/v1/exercises.json',
+          headers: { "Authorization": 'Token token=' + gon.api },
+          type: 'GET',
+          success: function(result) {
+            that.exercises = result;
+          }
+        });
+      }
     },
     methods: {
       isSetMuscle: function(exercise) {
@@ -49,14 +51,16 @@ document.addEventListener("DOMContentLoaded", function(event) {
     },
     mounted: function() {
       var that = this;
-      $.ajax({
-        url: '/api/v1/exercises/' + this.exerciseID + '.json',
-        headers: { "Authorization": 'Token token=' + gon.api },
-        type: 'GET',
-        success: function(result) {
-          that.exercise = result;
-        }
-      });
+      if (window.location.pathname.includes("/exercises/")) {
+        $.ajax({
+          url: '/api/v1/exercises/' + this.exerciseID + '.json',
+          headers: { "Authorization": 'Token token=' + gon.api },
+          type: 'GET',
+          success: function(result) {
+            that.exercise = result;
+          }
+        });
+      }
     },
     methods: {
       createNote: function() {
@@ -115,6 +119,30 @@ document.addEventListener("DOMContentLoaded", function(event) {
       },
 
     }
+  });
+
+  var app11 = new Vue({
+    el: '#show-exercise-app',
+    data: {
+      exerciseID: window.location.pathname.match(/\d+/)[0],
+      message: 'Hello Show Message',
+      exercise: [],
+      firstGif: '',
+    },
+    mounted: function() {
+      var that = this;
+      if (window.location.pathname.includes("/exercises/")) {
+        $.ajax({
+          url: '/api/v1/exercises/' + this.exerciseID + '.json',
+          headers: { "Authorization": 'Token token=' + gon.api },
+          type: 'GET',
+          success: function(result) {
+            that.exercise = result;
+            that.firstGif = that.exercise.images[0].url;
+          }
+        });
+      }
+    },
   });
 
 });

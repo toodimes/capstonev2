@@ -1,0 +1,55 @@
+<div id="messages-index-app2">
+  <%= render "layouts/breadcrumbs" %>
+  <div class="container">
+    <div class="row">
+      <!-- <a href="#new_message_form" id=""><input type="button" value="New Message" class="btn btn-default pull-right"></a> -->
+      <div class="col-md-12">
+        <!-- POPUP MESSAGE FORM -->
+        <a href="#x" class="overlay" id="new_message_form"></a>
+        <div class="box">
+         <h3><img class="img-circle message-img" :src="messaging.avatar" alt=""> {{ messaging.name }}</h3>
+          <input v-on:keyup.enter="sendMessage()" v-model="newMessage">  <span v-on:click="sendMessage()" class="livicon send-message" data-name="message-out" data-onparent="false" data-size="30"></span>
+         <a href="#close" class="close"></a>
+       </div>
+       <!-- END POPUP FORM  -->
+      </div>
+
+      <div class="col-md-6">
+        <div class="sidebar">
+          <h3>Trainers</h3>
+          <div class="widget widget-best-sellers">
+            <ul>
+              <li class="shop-product" v-for="trainer in trainers">
+                <figure>
+                  <img :src="trainer.avatar" alt="">
+                </figure>
+                <div class="product-info">
+                  <a :href="'/trainer_profiles/' + trainer.id">{{ trainer.name }}</a>
+                  <div class="price-tag"><a href="#new_message_form" v-on:click="bringPopUpIn(trainer)">Message</a></div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="sidebar">
+          <h3>Non-Trainers</h3>
+          <div class="widget widget-best-sellers">
+            <ul>
+              <li class="shop-product" v-for="user in users">
+                <figure>
+                  <img :src="user.avatar" alt="">
+                </figure>
+                <div class="product-info">
+                  <a :href="'/user_profiles/' + user.id">{{ user.name }}</a>
+                  <div class="price-tag"><a href="#new_message_form" v-on:click="bringPopUpIn(user)">Message</a></div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

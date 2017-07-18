@@ -6,6 +6,13 @@
 // body {
 //   padding: 70px;
 // }
+.active-bc { 
+  color: #fff;
+  font-weight: bold;
+}
+.exercise-gif {
+  
+}
 
 .fade-enter-active, .fade-leave-active {
   transition: opacity .5s
@@ -51,7 +58,7 @@
 }
 
 
-.active {
+.activeexercise {
   border: 1px solid gold;
 }
 
@@ -101,4 +108,26 @@
   background-color: #abc013;
   border-color: #abc013;
   cursor: pointer;
+}
+
+.form-left {
+  padding: 5px;
+  box-shadow: 0px 0px 5px 5px #888888;
+}
+.icon-form {
+  height: 100px;
+  // width: 100px;
+  text-align: center;
+  border: 1px solid grey;
+  span {
+    display: inline-block;
+    line-height: inherit;
+    vertical-align: middle;
+  }
+}
+.progress {
+  margin-top: 10px;
+}
+.service {
+  margin-bottom: 10px;
 }

@@ -1,6 +1,3 @@
-if current_user 
-  json.current_user current_user.id
-end
 json.clientTrainer program_prep.user.trainer.id
 json.id program_prep.id
 json.muscle program_prep.exercise.muscle.name

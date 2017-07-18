@@ -49,3 +49,29 @@
     </ul>
   </div>
 </section>
+<section class="portfolio style2">
+  <div class="container">
+    <h2>Some Exercises</h2>
+    <ul class="project-filter">
+        <li class="active" data-filter="*">all</li>
+        <% @muscles.each do |muscle| %>
+        <li data-filter=".<%= muscle.name %>"><%= muscle.name %></li>
+        <% end %>
+    </ul>
+  </div>
+  <div class="projects">
+    <% @exercises.each do |exercise| %>
+      <div class="project <%= exercise.muscle.name %>">
+        <figure>
+          <img src="<%= exercise.exercise_images.first.url %>" alt="">
+        </figure>
+        <div class="hover">
+          <div class="hover-content">
+            <a href="#"><span class="livicon" data-name="eye-open" data-onparent="true" data-size="30"></span></a>
+            <a href="#"><span class="livicon" data-name="share" data-onparent="true" data-size="30"></span></a>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</section>

@@ -18,7 +18,10 @@ Rails.application.routes.draw do
         resources :program_preps, except: [:edit, :show]
         resources :programs, except: [:new, :edit]
       end
-      resources :trainer_profiles
+      resources :trainer_profiles do 
+        resources :experiences, except: [:new, :edit]
+        resources :qualifications, except: [:new, :edit]
+      end
       resources :messages, except: [:update, :edit]
     end
   end
@@ -29,7 +32,7 @@ Rails.application.routes.draw do
     resources :programs, only: [:index, :show]
   end
   resources :trainer_profiles, except: [:create]
-  resources :messages, only: [:index, :show]
+  resources :messages, only: [:index, :show, :new]
   resources :exercises
 
 end

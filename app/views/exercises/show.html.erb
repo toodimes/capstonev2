@@ -1,13 +1,44 @@
-<h3><%= @exercise.name %></h3>
-<p><a href="/">Muscle: <%= @exercise.muscle.name %></a></p>
-<% @exercise.exercise_images.each do |gif| %>
-  <img src="<%= gif.url %>" alt="">
-<% end %>
-<ol>
-  <% @exercise.descriptions.each do |desc| %>
-    <li><%= desc.note %></li>
-  <% end %>
-</ol>
-<% if current_user && current_user.admin %>
-  <a href="/exercises/<%= @exercise.id %>/edit">Edit Exercise</a>
-<% end %>
+<div id="show-exercise-app">
+  <div class="container-fluid page-head">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12">
+          <ul class="breadcrumb">
+            <li><a href="/"><em class="fa fa-home fa-lg"></em></a></li>
+              <li><a href="/exercises">Exercises</a></li>
+              <li class="active-bc">{{ exercise.name }}</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- END BREADCRUMBS -->
+
+  <!-- BEGIN EXERCISE DETAIL -->
+  <div class="portfolio-detail">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-10 col-md-offset-1 col-xs-12">
+          <% if current_user && current_user.admin %>
+            <a href="/exercises/<%= @exercise.id %>/edit">Edit Exercise</a>
+          <% end %>
+          <figure class="exercise-gif">
+            <img :src="firstGif" alt="/">
+          </figure>
+          <h4>{{ exercise.name }}</h4>
+          <ul class="meta-tags">
+            <li><span>Muscle:</span></li>
+              <li><a href="#">{{ exercise.muscle }}</a> /</li>
+          </ul>
+          <div class="border-blue"></div>
+          <div class="folio-info">
+          <ol>
+            <li v-for="description in exercise.descriptions">{{ description.note }}</li>
+          </ol>
+          </div>
+          <div class="border-blue"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

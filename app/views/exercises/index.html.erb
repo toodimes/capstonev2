@@ -3,30 +3,30 @@
    <div class="row">
       <div class="col-md-12">
         <h4>Filter By Muscle: 
-          <button v-on:click="setFilter('')" v-bind:class="{'active': this.searchFilter == ''}">All Exercises</button>
+          <button v-on:click="setFilter('')" v-bind:class="{'activeexercise': this.searchFilter === ''}">All Exercises</button>
         </h4>
         <div class="images">
-          <div class="muscle-img pull-left" v-on:click="setFilter('abs')" v-bind:class="{active: this.searchFilter == 'abs'}">
+          <div class="muscle-img pull-left" v-on:click="setFilter('abs')" v-bind:class="{activeexercise: this.searchFilter === 'abs'}">
             <img class="img-rounded img-responsive" src="https://lh3.googleusercontent.com/XOizDmzHcO36GYA87QYfqsRmeTrSmijvaLu2zOiuQcYQdOYI0tpkECqGIvaZFjMy-Q=w170" alt="Abdominals">
           </div>
-          <div class="muscle-img pull-left" v-on:click="setFilter('back')" v-bind:class="{active: this.searchFilter == 'back'}">
+          <div class="muscle-img pull-left" v-on:click="setFilter('back')" v-bind:class="{activeexercise: this.searchFilter === 'back'}">
             <img class="img-rounded img-responsive" src="http://images.shape.mdpcdn.com/sites/shape.com/files/styles/facebook_og_image/public/story/woman-with-straight-spine_0.jpg" alt="Back">
           </div>
-          <div class="muscle-img pull-left" v-on:click="setFilter('biceps')" v-bind:class="{active: this.searchFilter == 'biceps'}">
+          <div class="muscle-img pull-left" v-on:click="setFilter('biceps')" v-bind:class="{activeexercise: this.searchFilter === 'biceps'}">
             <img class="img-rounded img-responsive" src="https://image.spreadshirtmedia.net/image-server/v1/compositions/127142292/views/1,width=300,height=300,appearanceId=1,backgroundColor=E8E8E8,version=1439812226/i-love-my-biceps-t-shirts-men-s-slim-fit-t-shirt.jpg" alt="Biceps">
           </div>            
-          <div class="muscle-img pull-left" v-on:click="setFilter('chest')" v-bind:class="{active: this.searchFilter == 'chest'}">
+          <div class="muscle-img pull-left" v-on:click="setFilter('chest')" v-bind:class="{activeexercise: this.searchFilter === 'chest'}">
             <img class="img-rounded img-responsive" src="http://images.clipartpanda.com/chest-clipart-body_chest.gif" alt="Chest">
           </div>
-          <div class="muscle-img pull-left" v-on:click="setFilter('shoulders')" v-bind:class="{active: this.searchFilter == 'shoulders'}">
+          <div class="muscle-img pull-left" v-on:click="setFilter('shoulders')" v-bind:class="{activeexercise: this.searchFilter === 'shoulders'}">
             <img class="img-rounded img-responsive" src="http://images.clipartpanda.com/shoulder-clipart-shoulders.gif" alt="Chest">
           </div>
-          <div class="muscle-img pull-left" v-on:click="setFilter('triceps')" v-bind:class="{active: this.searchFilter == 'triceps'}">
+          <div class="muscle-img pull-left" v-on:click="setFilter('triceps')" v-bind:class="{activeexercise: this.searchFilter === 'triceps'}">
             <img class="img-rounded img-responsive" src="https://upload.wikimedia.org/wikipedia/commons/8/83/Triceps_brachii.png" alt="Chest">
           </div>
         </div>
       </div>
-      <transition-group name="slide-fade">
+      <transition-group name="slide-fade" mode="in-out">
         <div class="col-md-6 col-lg-6" v-for="exercise in exercises" v-if="isSetMuscle(exercise)" v-bind:key="exercise.id">
            <div class="panel panel-success">
              <div class="panel-heading" v-on:click="setDescriptions(exercise)">
