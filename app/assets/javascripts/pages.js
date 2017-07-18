@@ -14,14 +14,16 @@ document.addEventListener("DOMContentLoaded", function(event) {
     },
     mounted: function() {
       var that = this;
-      $.ajax({
-        url: '/api/v1/user_profiles/' + this.userID + '/goals.json',
-        headers: { "Authorization": 'Token token=' + gon.api },
-        type: 'GET',
-        success: function(result) {
-          that.userInfo = result;
-        }
-      });
+      if (window.location.pathname.includes("/goals/")) {
+        $.ajax({
+          url: '/api/v1/user_profiles/' + this.userID + '/goals.json',
+          headers: { "Authorization": 'Token token=' + gon.api },
+          type: 'GET',
+          success: function(result) {
+            that.userInfo = result;
+          }
+        });
+      }
     },
 
     methods: {
@@ -95,14 +97,16 @@ document.addEventListener("DOMContentLoaded", function(event) {
     },
     mounted: function() {
       var that = this;
-      $.ajax({
-        url: '/api/v1/user_profiles/' + this.userID + '/programs/' + this.programID + '.json',
-        headers: { "Authorization": 'Token token=' + gon.api },
-        type: 'GET',
-        success: function(result) {
-          that.program = result;
-        }
-      });
+      if (window.location.pathname.includes("/programs/")) {
+        $.ajax({
+          url: '/api/v1/user_profiles/' + this.userID + '/programs/' + this.programID + '.json',
+          headers: { "Authorization": 'Token token=' + gon.api },
+          type: 'GET',
+          success: function(result) {
+            that.program = result;
+          }
+        });
+      }
       // $.get('/api/v1/user_profiles/' + this.userID + '/programs/' + this.programID + '.json', function(result) {
       //   this.program = result;
       // }.bind(this));      
@@ -120,16 +124,18 @@ document.addEventListener("DOMContentLoaded", function(event) {
     },
     mounted: function() {
       var that = this;
-      $.ajax({
-        url: '/api/v1/user_profiles/' + this.userID + '/programs.json',
-        headers: { "Authorization": 'Token token=' + gon.api },
-        type: 'GET',
-        success: function(result) {
-          that.remainingPrograms = result;
-          that.firstProgram = result[0];
-          that.remainingPrograms.splice(0, 1);
-        }
-      });
+      if (window.location.pathname.includes("/programs/")) {
+        $.ajax({
+          url: '/api/v1/user_profiles/' + this.userID + '/programs.json',
+          headers: { "Authorization": 'Token token=' + gon.api },
+          type: 'GET',
+          success: function(result) {
+            that.remainingPrograms = result;
+            that.firstProgram = result[0];
+            that.remainingPrograms.splice(0, 1);
+          }
+        });
+      }
     },
     methods: {
       goToProgram: function(program) {

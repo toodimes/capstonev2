@@ -4,7 +4,6 @@
   <p>Gender:</p>
     <input type="radio" name="gender" value="male">Male<br>
     <input type="radio" name="gender" value="female">Female<br>
-  <textarea name="experience" id="" cols="30" rows="10"><%= @trainer.trainer_profile.experience %></textarea>
-  <textarea name="qualifications" id="" cols="30" rows="10"><%= @trainer.trainer_profile.qualifications %></textarea>
+  <textarea name="bio" id="" cols="30" rows="10"><%= @trainer.trainer_profile.bio %></textarea>
   <input type="submit" value="<%= submit_message %>">
 <% end %>

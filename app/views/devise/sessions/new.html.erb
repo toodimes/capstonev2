@@ -1,26 +1,42 @@
-<h2>Log in</h2>
-
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "off" %>
-  </div>
-
-  <% if devise_mapping.rememberable? -%>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
-    </div>
-  <% end -%>
-
-  <div class="actions">
-    <%= f.submit "Log in" %>
-  </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+<%= render "layouts/breadcrumbs" %>
+<section class="page-template">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12 col-md-12">
+        <div class="row">
+          <div class="col-xs-12 col-sm-6">
+              <h3>Don't have an account?</h3>
+              <p>By creating an account you can communicate with other users and trainers. Additionally you will be able to get customized Exercise Programs tailored for you by our certified trainers.</p>
+              <a class="btn btn-info" href="/users/sign_up">Create Account</a>
+          </div>
+          <div class=" col-xs-12 col-sm-6">
+            <div class="jumbotron">
+              <h3>Login to your account</h3>
+              <%= form_for(:user, :url => session_path(:user)) do |f| %>
+                <div class="field form-group">
+                  <div class="input-group">
+                    <span class="input-group-addon">
+                      <em class="fa fa-envelope fa-fw"></em>
+                    </span>
+                    <%= f.email_field :email, autofocus: true, class: 'form-control', placeholder: 'Email' %>
+                  </div>
+                </div>
+                <div class="field form-group">
+                  <div class="input-group">
+                    <span class="input-group-addon">
+                      <em class="fa fa-key fa-fw"></em>
+                    </span>
+                    <%= f.password_field :password, autocomplete: "off", class: 'form-control', placeholder: 'Password' %>
+                  </div>
+                </div>
+                <%= f.submit "Log in", class: 'btn btn-default' %>
+                <button class="btn btn-default" type="submit"><i class="fa fa-facebook"></i></button>
+                <button class="btn btn-default" type="submit"><i class="fa fa-twitter"></i></button>
+              <% end %>    
+            </div>
+          </div>    
+        </div>    
+      </div><!--column-products-->
+    </div> <!--main row-->     
+  </div>     
+</section>

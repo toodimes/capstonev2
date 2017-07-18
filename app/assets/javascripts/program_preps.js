@@ -15,14 +15,16 @@ document.addEventListener("DOMContentLoaded", function(event) {
     },
     mounted: function() {
       var that = this;
-      $.ajax({
-        url: '/api/v1/user_profiles/' + this.userID + '/program_preps.json',
-        headers: { "Authorization": 'Token token=' + gon.api },
-        type: 'GET',
-        success: function(result) {
-          that.programPreps = result;
-        }
-      });
+      if (window.location.pathname.includes("/program_preps")) {
+        $.ajax({
+          url: '/api/v1/user_profiles/' + this.userID + '/program_preps.json',
+          headers: { "Authorization": 'Token token=' + gon.api },
+          type: 'GET',
+          success: function(result) {
+            that.programPreps = result;
+          }
+        });
+      }
       // $.get('/api/v1/user_profiles/' + this.userID + '/program_preps.json', function(result) {
       //   this.programPreps = result;
       // }.bind(this));
@@ -115,25 +117,27 @@ document.addEventListener("DOMContentLoaded", function(event) {
     },
     mounted: function() {
       var that = this;
-      $.ajax({
-        url: '/api/v1/user_profiles/' + this.userID + '/program_preps/new.json',
-        headers: { "Authorization": 'Token token=' + gon.api },
-        type: 'GET',
-        success: function(result) {
-          that.exercises = result;
-        }
-      });
-      $.ajax({
-        url: '/api/v1/user_profiles/' + this.userID + '/program_preps.json',
-        headers: { "Authorization": 'Token token=' + gon.api },
-        type: 'GET',
-        success: function(data) {
-          for (var i = 0; i < data.length; i++) {
-            that.programPrepIDs.push(data[i].exercise_id);
-            that.programPrepNames.push(data[i].name);
+      if (window.location.pathname.includes("/program_preps/new")) {
+        $.ajax({
+          url: '/api/v1/user_profiles/' + this.userID + '/program_preps/new.json',
+          headers: { "Authorization": 'Token token=' + gon.api },
+          type: 'GET',
+          success: function(result) {
+            that.exercises = result;
           }
-        }
-      });
+        });
+        $.ajax({
+          url: '/api/v1/user_profiles/' + this.userID + '/program_preps.json',
+          headers: { "Authorization": 'Token token=' + gon.api },
+          type: 'GET',
+          success: function(data) {
+            for (var i = 0; i < data.length; i++) {
+              that.programPrepIDs.push(data[i].exercise_id);
+              that.programPrepNames.push(data[i].name);
+            }
+          }
+        });
+      }
     },
     methods: {
       isSetMuscle: function(exercise) {
@@ -191,8 +195,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
           });
         }
       },
-
-
     }
   });
 });

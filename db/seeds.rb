@@ -1,11 +1,8 @@
-# # users = User.all
-# # User.all.each do |user|
-# #   3.times do 
-# #     Message.create(user_id: user.id, recipient_id: users.sample.id, content: Faker::StarWars.quote)
-# #   end
-# # end
-# avatars = Avatar.all
-# avatars.each do |avatar|
-#   avatar.update(url: "http://lorempixel.com/#{Faker::Number.between(400,500)}/#{Faker::Number.between(400,500)}/people")
-# end
+trainers = User.where(is_trainer: true)
+trainers.each do |trainer|
+  trainer.trainer_profile.update(bio: Faker::StarWars.quote)
+  trainer.experiences.each do |experience|
+    experience.update(description: Faker::Hipster.paragraph(7))
+  end
+end
 puts "Done!"

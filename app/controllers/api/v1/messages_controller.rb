@@ -1,5 +1,5 @@
 class Api::V1::MessagesController < ApplicationController
-  # before_action :restrict_access
+  before_action :restrict_access
 
   def index
     user = User.find_by(id: params[:current_user_id])
@@ -11,6 +11,11 @@ class Api::V1::MessagesController < ApplicationController
     user = User.find_by(id: params[:current_user_id])
     @messages = Message.where(recipient_id: user.id, user_id: params[:id]).or(Message.where(user_id: user.id, recipient_id: params[:id])).order(id: :asc)
     render :index
+  end
+
+  def new
+    @users = User.all.order(id: :asc)
+    render :new
   end
 
   def create

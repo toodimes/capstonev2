@@ -1,17 +1,88 @@
-<%= image_tag "#{@trainer.avatars.last.url}", class: "media-object avatar" %>
-<% if current_user && current_user.id == @trainer.id %>
-  <p><a href="/avatars/new">Edit Avatar</a></p>
-<% end %>
-<% if current_user && current_user.admin %>
-  <button><a href="/exercises/new">Add an exercise</a></button>
-<% end %>
-<h2><%= @trainer.trainer_profile.name %></h2>
-<p>Gender: <%= @trainer.trainer_profile.gender.capitalize %></p>
-<p>Experience: <%= @trainer.trainer_profile.experience %></p>
-<p>Qualifications: <%= @trainer.trainer_profile.qualifications %></p>
-<% if @clients.length >= 1 %>
-  <h3>Clients</h3>
-    <% @clients.each do |client| %>
-      <p> <a href="/user_profiles/<%= client.id %>"><%= client.user_profile.name %></a></p>
-    <% end %>
-<% end %>
+<div id="show-trainer-app">
+  <div class="container-fluid page-head">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12">
+          <h2>{{ trainer.name }}</h2>
+          <ul class="breadcrumb">
+            <li><a href="/"><em class="fa fa-home fa-lg"></em></a></li>
+            <li><a href="/trainer_profiles">Trainers</a></li>
+            <li class="active-bc">{{ trainer.name }}</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div> <!-- END BREADCRUMBS -->
+
+  <section class="page-template">
+    <div class="container">
+      <div class="row profil-detail">
+        <div class="col-xs-12 col-md-3">
+          <figure class="member-fig">
+              <img :src="trainer.avatar" alt=""/>
+          </figure>
+        </div><!--column-->
+        <div class="col-xs-12 col-md-9">
+          <h2>Hello, I am <span>{{ trainer.name }}</span></h2>
+          <h3>Certified Trainer
+          <% if current_user && current_user.id == @trainer.id %>
+          || <a href="/trainer_profiles/<%= @trainer.id %>/edit">Edit Profile</a>
+          <% end %>
+          <% if current_user && current_user.admin %>
+          || <a href="/exercises/new">Add an exercise</a>
+          <% end %>
+          </h3>
+          <p>{{ trainer.bio }}</p>
+        </div><!--column-->
+        <div class="col-xs-12">
+          
+        </div><!-- column -->
+      </div><!--row-->
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="profile-timeline">
+            <div class="time-box">
+              <div class="box-head">
+                <span class="box-icon fa fa-rocket"></span>
+                <h2>Experience</h2>
+              </div><!--box-head-->
+              <template v-for="experience in trainer.experiences">
+                <div class="article-post row">
+                  <div class="col-xs-12 col-sm-3 col-md-2 timebox-info">
+                    <div class="article-meta">
+                      <div class="meta-time"><span class="day-month">{{ experience.start_date }} - {{ experience.end_date }}</span></div>
+                    </div>    
+                  </div>
+                  <div class="col-xs-12 col-sm-9 col-md-10 post-detail">
+                    <h4>{{ experience.company }} <span>{{ experience.title }}</span></h4>
+                    <p>{{ experience.description }}</p>
+                  </div>
+                </div><!-- END ARTICLE-POST ROW -->
+              </template>                
+            </div><!-- END TIME-BOX -->
+            <div class="time-box">
+              <div class="box-head">
+                <span class="box-icon fa fa-trophy"></span>
+                <h2>Qualifications</h2>
+              </div>
+              <template v-for="qualification in trainer.qualifications">
+                <div class="article-post row">
+                  <div class="col-xs-12 col-sm-3 col-md-2 timebox-info">
+                    <div class="article-meta">
+                      <div class="meta-time"></div>
+                    </div>    
+                  </div>
+                  <div class="col-xs-12 col-sm-9 col-md-10 post-detail">
+                    <h3>{{ qualification.name }}</h3>
+                  </div>
+                </div>
+              </template>
+            </div><!-- END TIME-BOX -->
+          </div><!-- END PROFILE TIMELINE -->
+        </div><!-- END COL-XS-12 -->
+      </div><!-- END ROW -->
+    </div>
+  </section>
+</div>
+
+
