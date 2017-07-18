@@ -122,7 +122,23 @@ document.addEventListener("DOMContentLoaded", function(event) {
       },
       saveEditedExperienceMoveOn: function() {
         var that = this;
-        //ADD CODE BELOW
+        $.ajax({
+          url: '/api/v1/trainer_profiles/' + that.trainerID + '/experiences/' + that.editExperienceID + '.json',
+          headers: { "Authorization": 'Token token=' + gon.api },
+          data: { updateExperience: true, title: that.newExperienceTitle, description: that.newExperienceDescription, company: that.newExperienceCompany, start_date: that.newExperienceStartDate, end_date: that.newExperienceEndDate },
+          type: 'PATCH',
+          success: function(result) {
+            that.experiences.splice(that.editExperienceIndex, 1);
+            that.experiences[that.editExperienceIndex] = result;
+            that.editExperience = false;
+            that.showQualifications = true;
+            if (that.qualifications.length < 1) {
+              that.progress = "90%";
+            } else {
+              that.progress = "100%";
+            }
+          }
+        });
       },
       saveExperienceMoveOn: function() {
         var that = this;
