@@ -16,7 +16,7 @@ class UserProfilesController < ApplicationController
 
   def edit
     @user = User.find_by(id: params[:id])
-    if current_user && current_user.id == @user.id
+    if current_user && current_user.id == @user.id || current_user.id == @user.trainer_id || current_user.admin
       render "edit.html.erb"
     else
       flash[:danger] = "You are not authorized to edit this user."

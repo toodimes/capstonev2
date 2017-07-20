@@ -1,6 +1,0 @@
-json.id trainer_profile.id
-json.name trainer_profile.trainer_profile.name
-json.gender trainer_profile.trainer_profile.gender
-json.experience trainer_profile.trainer_profile.experience
-json.qualifications trainer_profile.trainer_profile.qualifications
-json.avatar trainer_profile.avatars.last.url

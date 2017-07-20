@@ -1,27 +1,154 @@
-<div class="container">
-  <div class="row">
-    <h1>Add a new exercise</h1>
-    <% if @exercise && @exercise.errors.any? %>
-      <h3><%= pluralize(@exercise.errors.count, "error") %> stopped this exercise from being added:</h3>
-      <% @exercise.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-    <% end %>
-    <%= form_tag "/exercises", method: :post do %>
-      <h2><input type="text" name="name" value="<%= @exercise.name %>"></h2>
-      <section>
-        <h3>Equipment Required
-          <input type="checkbox" name="equipment[]">
-        </h3>
-      </section>
-      <section>
-        <select name="muscle_id">
-          <% @muscles.each do |muscle| %>
-            <option value="<%= muscle.id %>"><%= muscle.name %></option>
-          <% end %>
-        </select>
-      </section>
-      <button type="submit">Add the exercise!</button>
-    <% end %>
-  </div>
+<div id="new-exercise-app">
+  <div class="container-fluid page-head">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12">
+          <h2>{{ message }}</h2>
+          <ul class="breadcrumb">
+            <li><a href="/"><em class="fa fa-home fa-lg"></em></a></li>
+            <li><a href="/exercises">Exercises</a></li>
+            <li class="active-bc">New Exercise</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div> <!-- END BREADCRUMBS -->
+  
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="checkout-wrapper">
+          <div class="row">
+            <div class="col-xs-12 col-sm-6 form-left">
+              <h3>Exercise Information</h3>
+              <div class="row">
+                <div class="col-xs-12">
+                  <div class="progress-wrapper">
+                    <div class="progress">
+                      <div class="progress-bar progress-default" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" v-bind:style="{ width: progress }">
+                        <span class="sr-only">{{ progress }} Complete</span>
+                      </div>
+                    </div><!-- END PROGRESS -->
+                  </div><!-- END PROGRESS-WRAPPER -->
+                </div><!-- END COL-XS-12 -->
+              </div><!-- END ROW -->
+              <transition name="fade" mode="out-in">
+                <template v-if="showInformation">
+                  <div v-bind:key="123">
+                    <h4>Exercise Info</h4>
+                    <div class="col-xs-12">
+                      <label>Name:</label>
+                      <input type="text" v-model="newExerciseName">
+                    </div>
+                    <div class="col-xs-12">
+                      <label>Muscle:</label>
+                      <select v-model="newExerciseMuscle">
+                        <% @muscles.each do |muscle| %>
+                          <option value="<%= muscle.id %>"><%= muscle.name %></option>
+                        <% end %>
+                      </select>
+                    </div>
+                    <div class="col-xs-12">
+                      <label>Does This Exercise Require Equipment:</label>
+                      <input type="radio" value="true" v-model="newExerciseEquipment"> Yes
+                      <input type="radio" value="false" v-model="newExerciseEquipment"> No 
+                    </div>
+                    <button class="btn btn-lg btn-success" style="width: 100%" v-on:click="saveInfo()">Save Info</button>
+                  </div>
+                </template>
+                <template v-if="showDescriptions">
+                  <div v-bind:key="456">
+                    <div class="col-xs-12">
+                      <label>New Step:</label>
+                      <input type="text" v-model="newExerciseDescription" v-on:keyup.enter="createNote()">
+                    </div>
+                    <div class="col-xs-12">
+                      <ol>
+                        <li v-for="description in descriptions">{{ description.note }} <span v-on:click="removeNote(description)" class="fa fa-trash fa-3"></span></li>
+                      </ol>
+                    </div>
+                    <div class="btn-group btn-group-justified">
+                      <a v-on:click="backToInformation()" class="btn btn-info">Back</a>
+                      <a v-on:click="createNote()" class="btn btn-primary ">Add</a>
+                      <a v-on:click="moveOn()" class="btn btn-success ">Move On</a>
+                    </div>
+                  </div>
+                </template>
+                <template v-if="showExerciseImages">
+                  <div v-bin:key="789">
+                    <div class="col-xs-12">
+                      <label>New Exercise Image</label>
+                      <input type="text" v-model="newExerciseImage">
+                    </div>
+                    <div class="btn-group btn-group-justified">
+                      <a v-on:click="backToDescriptions()" class="btn btn-info" v-bind:class="{ disabled: disableBackToDescription }">Back</a>
+                      <a v-on:click="createGif()" class="btn btn-primary ">Add</a>
+                      <a :href="'/exercises/' + exercise.id" class="btn btn-success ">Move On</a>
+                    </div>
+                  </div>
+                </template>
+              </transition>
+            </div><!-- END FORM-LEFT -->
+            <template v-if="exercisePreview">
+              <div class="col-xs-12 col-sm-6">
+                <h3>Exercise Preview</h3>
+                <div class="row">
+                  <div class="col-xs-12 text-center">
+                    <img class="img-responsive profile-preview-img" :src="exerciseImages[0].url" alt="">
+                  </div>
+                  <div class="col-xs-12 text-center">
+                    <h2>{{ exercise.name }}</h2>
+                  </div>
+                  <div class="col-xs-12 text-center">
+                    <h4>Muscle: {{ exercise.muscle }}</h4>
+                  </div>
+                  <div class="col-xs-12 text-center">
+                    <h4 v-if="exercise.equipment">This exercise requires equipment</h4>
+                    <h4 v-if="!exercise.equipment">This exercise does not require any equipment</h4>
+                  </div>
+                </div><!-- END ROW -->
+                <div class="row">
+                  <div class="col-xs-12">
+                    <div class="profile-timeline">
+                      <div class="time-box">
+                        <div class="box-head">
+                          <span class="box-icon fa fa-sitemap"></span>
+                          <h2>Directions</h2>
+                        </div>
+                        <template v-for="description in descriptions">
+                          <div class="article-post row">
+                            <div class="col-xs-12 col-sm-3 col-md-2 timebox-info">
+                              <div class="article-meta">
+                                <h2>
+                                  <span>
+                                    <i v-on:click="removeNote(description)" class="fa fa-trash"></i>
+                                  </span>
+                                </h2>
+                              </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-9 col-md-10 post-detail">
+                              <h4>{{ description.note }}</h4>
+                            </div>
+                          </div><!-- END ARTICLE-POST -->
+                        </template>
+                        <template v-if="exerciseImages.length > 1" v-for="gif in exerciseImages">
+                          <div class="col-xs-12">
+                            <img class="img-responsive profile-preview-img" :src="gif.url" alt="">
+                            <button v-on:click="removeGif(gif)" class="btn btn-danger" style="width: 100%; margin-top: 5px;"><i class="fa fa-trash"></i></button>
+                            <hr>
+                          </div>
+                        </template>
+                      </div><!-- END TIME-BOX -->
+                    </div><!-- END PROFILE-TIMELINE -->
+                  </div><!-- END COL-XS-12 -->
+                </div><!-- END ROW -->
+              </div><!-- END RIGHT COLUMN -->
+            </template>
+          </div><!-- END ROW -->
+        </div><!-- END CHECKOUT-WRAPPER -->
+      </div><!-- END COL-XS-12 -->
+    </div><!-- END ROW -->
+  </div><!-- END CONTAINER -->
+
 </div>
+

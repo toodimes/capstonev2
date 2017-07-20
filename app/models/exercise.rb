@@ -5,6 +5,7 @@ class Exercise < ApplicationRecord
   after_create :assign_addons
 
   validates :name, :presence => true
+  validates :name, :uniqueness => true
 
   def assign_addons
     ExerciseImage.create(exercise_id: self.id)

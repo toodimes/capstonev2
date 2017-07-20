@@ -25,15 +25,16 @@
           <figure class="exercise-gif">
             <img :src="firstGif" alt="/">
           </figure>
-          <h4>{{ exercise.name }}</h4>
-          <ul class="meta-tags">
-            <li><span>Muscle:</span></li>
-              <li><a href="#">{{ exercise.muscle }}</a> /</li>
-          </ul>
+          <h2>{{ exercise.name }}</h2>
+          <div>
+            <h4>Muscle: {{ exercise.muscle }}</h4>
+          </div>
           <div class="border-blue"></div>
           <div class="folio-info">
           <ol>
-            <li v-for="description in exercise.descriptions">{{ description.note }}</li>
+            <template v-for="description in exercise.descriptions">
+              <li>{{ description.note }}</li>
+            </template>
           </ol>
           </div>
           <div class="border-blue"></div>

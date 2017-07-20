@@ -39,11 +39,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
             that.newGoal = '';
           }
         });
-        // var params = { name: this.newGoal, addGoal: true };
-        // $.post('/api/v1/user_profiles/' + this.userID + '/goals.json', headers, params, function(result) {
-        //   that.userInfo = result;
-        //   that.newGoal = '';
-        // });
       },
 
       markCompleted: function(goal) {

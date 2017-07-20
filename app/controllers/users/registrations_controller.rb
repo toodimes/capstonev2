@@ -51,9 +51,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # The path used after sign up.
   def after_sign_up_path_for(resource)
     if resource.trainer_application == true
-      "/trainer_profiles/new"
+      "/trainer_profiles/#{resource.id}/edit"
     else
-      "/user_profiles/new"
+      "/user_profiles/#{resource.id}/edit"
     end
   end
 

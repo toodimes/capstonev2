@@ -257,7 +257,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     },
     mounted: function() {
       var that = this;
-      if (window.location.pathname.includes("/trainer_profiles")) {
+      if (window.location.pathname.includes("/trainer_profiles/")) {
         $.ajax({
           url: '/api/v1/trainer_profiles/' + that.userID + '.json',
           headers: { "Authorization": 'Token token=' + gon.api },

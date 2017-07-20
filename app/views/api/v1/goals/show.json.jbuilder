@@ -1,0 +1,1 @@
+json.partial! @goal, partial: 'goal', as: :goal
