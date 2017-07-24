@@ -34,6 +34,18 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def after_sign_in_path_for(resource)
+    if request.env['omniauth.origin']
+      if resource.trainer_application == true
+        "/trainer_profiles/#{resource.id}/edit"
+      else
+        "/user_profiles/#{resource.id}/edit"
+      end
+    else
+      root_path
+    end
+  end
+
   # def validate_user_or_trainer
   #   client = User.find_by(id: params[:user_profile_id])
   #   unless current_user && current_user.id == client.id || current_user && current_user.id == client.trainer.id || current_user && current_user.admin

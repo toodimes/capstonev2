@@ -11,7 +11,7 @@ if user_profile.goals
     json.completed goal.completed
   end
 end
-json.trainer_id user_profile.trainer.id
+json.trainer_id user_profile.trainer_id
 json.trainer_name user_profile.trainer.trainer_profile.name
 json.trainer_gender user_profile.trainer.trainer_profile.gender
 json.trainer_bio user_profile.trainer.trainer_profile.bio
