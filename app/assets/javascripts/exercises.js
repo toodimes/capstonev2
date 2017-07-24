@@ -1,13 +1,14 @@
 /* global Vue */
 /* global $ */
-document.addEventListener("DOMContentLoaded", function(event) {
-  var app = new Vue({
+document.addEventListener("DOMContentLoaded", function(event) { 
+  var ExerciseIndexApp = new Vue({
     el: '#app',
     data: {
       message: 'Hello Vue!',
       exercises: [],
       searchFilter: '',
       isActive: false,
+      muscles: [],
     },
     mounted: function() {
       var that = this;
@@ -18,6 +19,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
           type: 'GET',
           success: function(result) {
             that.exercises = result;
+            that.muscles = result[0].muscles;
           }
         });
       }
@@ -39,15 +41,26 @@ document.addEventListener("DOMContentLoaded", function(event) {
     }
   });
 
-  var app2 = new Vue({
+
+  var EditExerciseApp = new Vue({
     el: "#edit-exercise-app",
     data: {
       exerciseID: window.location.pathname.match(/\d+/)[0],
       currentUserName: gon.currentUser,
       message: '',
+      progress: '33%',
+      showInformation: true,
+      showDescriptions: false,
+      showExerciseImages: false,
       exercise: [],
+      descriptions: [],
+      exerciseImages: [],
       newNote: '',
       newImage: '',
+      exerciseName: '',
+      exerciseMuscle: '',
+      exerciseEquipment: false,
+      muscles: [],
     },
     mounted: function() {
       var that = this;
@@ -58,21 +71,71 @@ document.addEventListener("DOMContentLoaded", function(event) {
           type: 'GET',
           success: function(result) {
             that.exercise = result;
+            that.descriptions = result.descriptions;
+            that.exerciseName = result.name;
+            that.exerciseMuscle = result.muscle;
+            that.exerciseImages = result.images;
+            that.exerciseEquipment = result.equipment;
+            that.muscles = result.muscles;
           }
         });
       }
     },
     methods: {
+      gifMoveOn: function() {
+        window.location.href = "/exercises/" + this.exerciseID;
+      },
+      moveOn: function() {
+        var that = this;
+        that.showDescriptions = false;
+        that.showInformation = false;
+        that.showExerciseImages = true;
+        that.progress = "100%";
+      },
+      backToDescriptions: function() {
+        var that = this;
+        that.showDescriptions = true;
+        that.showInformation = false;
+        that.showExerciseImages = false;
+        that.progress = "66%";
+      },
+      saveInfo: function() {
+        var that = this;
+        if (that.exerciseName !== that.exercise.name || that.exerciseMuscle !== that.exercise.muscle.id || that.exerciseEquipment !== that.exercise.equipment) {
+          $.ajax({
+            url: '/api/v1/exercises/' + that.exerciseID + '.json',
+            headers: { "Authorization": 'Token token=' + gon.api },
+            data: { updateInfo: true, name: that.exerciseName, muscle_id: that.exerciseMuscle, equipment: that.exerciseEquipment },
+            type: 'PATCH',
+            success: function(result) {
+              that.showInformation = false;
+              that.showDescriptions = true;
+              that.progress = "66%";
+            }
+          });
+        } else {
+          that.showInformation = false;
+          that.showDescriptions = true;
+          that.progress = "66%";
+        }
+      },
+      backToInformation: function() {
+        var that = this;
+        //ADD CODE
+        that.showInformation = true;
+        that.showDescriptions = false;
+        that.progress = "33%";
+      },
       createNote: function() {
         var that = this;
-        // var params = {note: this.newNote};
         $.ajax({
-          url: "/api/v1/exercises/" + this.exerciseID + ".json",
+          url: "/api/v1/exercises/" + that.exerciseID + ".json",
           headers: { "Authorization": 'Token token=' + gon.api },
-          data: { note: this.newNote, createNote: true },
+          data: { note: that.newNote, createNote: true },
           type: 'PATCH',
           success: function(result) {
-            that.exercise = result;
+            console.log(result);
+            that.descriptions.push(result);
             that.newNote = '';
           }
         });
@@ -86,7 +149,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
           data: { url: this.newImage, createImage: true },
           type: 'PATCH',
           success: function(result) {
-            that.exercise = result;
+            that.exerciseImages.push(result);
             that.newImage = '';
           }
         });
@@ -94,32 +157,35 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
       removeNote: function(description) {
         var that = this;
+        var index = that.descriptions.indexOf(description);
         $.ajax({
           url: "/api/v1/exercises/" + this.exerciseID + ".json",
           headers: { "Authorization": 'Token token=' + gon.api },
-          data: { deleteNote: true, noteID: description.note_id },
+          data: { deleteNote: true, noteID: description.id },
           type: 'PATCH',
           success: function(result) {
-            that.exercise = result;
+            that.descriptions.splice(index, 1);
           }
         });
       },
 
-      removeGif: function(image) {
+      removeGif: function(gif) {
         var that = this;
+        var index = that.exerciseImages.indexOf(gif);
         $.ajax({
-          url: "/api/v1/exercises/" + this.exerciseID + ".json",
+          url: "/api/v1/exercises/" + that.exerciseID + ".json",
           headers: { "Authorization": 'Token token=' + gon.api },
-          data: { deleteGif: true, gifID: image.image_id },
+          data: { deleteGif: true, gifID: gif.id },
           type: 'PATCH',
           success: function(result) {
-            that.exercise = result;
+            that.exerciseImages.splice(index, 1);
           }
         });
       },
 
     }
   });
+
 
   var app11 = new Vue({
     el: '#show-exercise-app',
@@ -145,4 +211,12 @@ document.addEventListener("DOMContentLoaded", function(event) {
     },
   });
 
+
 });
+
+function showCoordinates() {
+  var x = event.clientX;
+  var y = event.clientY;
+  var coordinates = "x:" + x + " y:" + y;
+  document.getElementById("coordinates").innerHTML = coordinates;
+}

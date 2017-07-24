@@ -12,9 +12,9 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      resources :exercises, except: [:new, :create, :destroy]
-      resources :user_profiles do
-        resources :goals, except: [:new, :show, :edit]
+      resources :exercises, except: [:new, :destroy]
+      resources :user_profiles, except: [:new, :create] do
+        resources :goals, except: [:new, :edit]
         resources :program_preps, except: [:edit, :show]
         resources :programs, except: [:new, :edit]
       end
@@ -26,7 +26,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :user_profiles, except: [:create] do 
+  resources :user_profiles, except: [:new, :create] do 
     resources :goals, only: [:index]
     resources :program_preps, only: [:index, :new]
     resources :programs, only: [:index, :show]

@@ -1,1 +1,1 @@
-json.partial! 'goal.json.jbuilder', user: @user
+json.array! @goals, partial: 'goal', as: :goal

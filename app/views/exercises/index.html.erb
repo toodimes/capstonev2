@@ -1,4 +1,27 @@
 <div id="app">
+<div class="container-fluid page-head">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 col-md-12 col-sm-12">
+        <ul class="breadcrumb">
+          <li class="<%# 'active' if request.path == '/' %>"><a href="/"><em class="fa fa-home fa-lg"></em></a></li>
+          <% request.path.split("/").each do |path| %>
+            <% if path != "" %>
+              <li class="<%# 'active' if request.path.split('/').last == path %>">
+                <% if request.path.split("/").last == path %>
+                  <%= path.capitalize %>
+                <% else %>
+                  <a href="/<%= path %>"><%= path.capitalize %></a>
+                <% end %>
+              </li>
+            <% end %>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div><!-- END BREADCRUMBS -->
+<section class="portfolio style2">
  <div class="container">
    <div class="row">
       <div class="col-md-12">
@@ -6,34 +29,21 @@
           <button v-on:click="setFilter('')" v-bind:class="{'activeexercise': this.searchFilter === ''}">All Exercises</button>
         </h4>
         <div class="images">
-          <div class="muscle-img pull-left" v-on:click="setFilter('abs')" v-bind:class="{activeexercise: this.searchFilter === 'abs'}">
-            <img class="img-rounded img-responsive" src="https://lh3.googleusercontent.com/XOizDmzHcO36GYA87QYfqsRmeTrSmijvaLu2zOiuQcYQdOYI0tpkECqGIvaZFjMy-Q=w170" alt="Abdominals">
-          </div>
-          <div class="muscle-img pull-left" v-on:click="setFilter('back')" v-bind:class="{activeexercise: this.searchFilter === 'back'}">
-            <img class="img-rounded img-responsive" src="http://images.shape.mdpcdn.com/sites/shape.com/files/styles/facebook_og_image/public/story/woman-with-straight-spine_0.jpg" alt="Back">
-          </div>
-          <div class="muscle-img pull-left" v-on:click="setFilter('biceps')" v-bind:class="{activeexercise: this.searchFilter === 'biceps'}">
-            <img class="img-rounded img-responsive" src="https://image.spreadshirtmedia.net/image-server/v1/compositions/127142292/views/1,width=300,height=300,appearanceId=1,backgroundColor=E8E8E8,version=1439812226/i-love-my-biceps-t-shirts-men-s-slim-fit-t-shirt.jpg" alt="Biceps">
-          </div>            
-          <div class="muscle-img pull-left" v-on:click="setFilter('chest')" v-bind:class="{activeexercise: this.searchFilter === 'chest'}">
-            <img class="img-rounded img-responsive" src="http://images.clipartpanda.com/chest-clipart-body_chest.gif" alt="Chest">
-          </div>
-          <div class="muscle-img pull-left" v-on:click="setFilter('shoulders')" v-bind:class="{activeexercise: this.searchFilter === 'shoulders'}">
-            <img class="img-rounded img-responsive" src="http://images.clipartpanda.com/shoulder-clipart-shoulders.gif" alt="Chest">
-          </div>
-          <div class="muscle-img pull-left" v-on:click="setFilter('triceps')" v-bind:class="{activeexercise: this.searchFilter === 'triceps'}">
-            <img class="img-rounded img-responsive" src="https://upload.wikimedia.org/wikipedia/commons/8/83/Triceps_brachii.png" alt="Chest">
-          </div>
+          <template v-for="muscle in muscles">
+            <div class="muscle-img pull-left" v-on:click="setFilter(muscle.name)" v-bind:class="{activeexercise: this.searchFilter == muscle.name}">
+              <img class="img-rounded img-responsive" :src="muscle.avatar" alt="">
+            </div>
+          </template>
         </div>
       </div>
-      <transition-group name="slide-fade" mode="in-out">
+      
+      <transition-group name="slide-fade" mode="out-in">
         <div class="col-md-6 col-lg-6" v-for="exercise in exercises" v-if="isSetMuscle(exercise)" v-bind:key="exercise.id">
            <div class="panel panel-success">
              <div class="panel-heading" v-on:click="setDescriptions(exercise)">
                <a v-bind:href="'/exercises/' + exercise.id ">{{ exercise.name }}</a>
              </div>
              <div class="panel-body">
-               <div class="slimScroller" style="height:400px; position: relative; overflow-y: scroll;" data-rail-visible="1" data-always-visible="0">
                 <p>Muscle: {{ exercise.muscle }}</p>
                 <div class="panel-exercise-image text-center">
                   <img class="img-responsive" :src="exercise.images[0].url" alt="">
@@ -44,12 +54,7 @@
                     <li v-for="description in exercise.descriptions">{{ description.note }}</li>
                   </ol>                  
                 </div>
-              </div>
              </div>
-             <!-- UNCOMMENT FOR PROGRAM PREP ADD -->
-             <!-- <div class="panel-footer pp-panel-footer text-center">
-               <span><i class="fa fa-plus fa-3"></i></span>
-             </div> -->
              <div class="panel-footer pp-panel-footer text-center" v-on:click="setInfoVisible(exercise)">
                 Description
              </div>
@@ -57,7 +62,6 @@
         </div>
         <!--END V-FOR-->
       </transition-group>
-
-   </div>
  </div>
+</section>
 </div>

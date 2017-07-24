@@ -1,27 +1,88 @@
 <div id="user-profile-show-app">
-  <h2>{{ message }}</h2>
-</div>
-
-<div class="info">
-  <%= image_tag "#{@user.avatars.last.url}", class: "media-object avatar" %>
-  <% if current_user && current_user.id == @user.id %>
-    <p><a href="/avatars/new">Edit Avatar</a></p>
-    <p><a href="/user_profiles/<%= @user.id %>/programs">View Programs</a></p>
-    <p><a href="/messages">Messages</a></p>
-  <% end %>
-  <p>Name: <%= @user.user_profile.name %></p>
-  <p>Gender: <%= @user.user_profile.gender.capitalize %></p>
-  <p>Has Equipment: <%= @user.user_profile.equipment ? "Yes" : "No" %></p>
-  <p>Has Paid: <%= @user.user_profile.paid ? "Yes" : "No" %></p>
-  <p>Trainer: <a href="/trainer_profiles/<%= @user.trainer.id %>"><%= @user.trainer.trainer_profile.name %></a></p>
-  <% if current_user && current_user.id == @user.trainer.id %>
-    <a href="/user_profiles/<%= @user.id %>/program_preps/new">New Program</a>
-    <a href="/user_profiles/<%= @user.id %>/programs">View Programs</a>
-  <% end %>
-  <% if @user.goals %>
-    <h2><a href="/user_profiles/<%= @user.id %>/goals">Goals:</a></h2>
-    <% @user.goals.each do |goal| %>
-      <p><%= goal.name %><i class="fa <%= goal.completed ? 'fa-check-square-o' : 'fa-square-o' %>"></i></p>
-    <% end %>
-  <% end %>
+  <div class="container-fluid page-head">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12">
+          <h2>{{ user.name }}</h2>
+          <ul class="breadcrumb">
+            <li><a href="/"><em class="fa fa-home fa-lg"></em></a></li>
+            <li><a href="/user_profiles">Users</a></li>
+            <li class="active-bc">{{ user.name }}</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div> <!-- END BREADCRUMBS -->
+  
+  <section class="page-template">
+    <div class="container">
+      <div class="row profil-detail">
+        <div class="col-xs-12 col-md-3">
+          <figure class="member-fig">
+            <img :src="user.avatar" alt="">
+          </figure>
+        </div>
+        <div class="col-xs-12 col-md-9">
+          <h2>Hi There! I am <span>{{ user.name }}</span></h2>
+          <% if current_user && current_user.id == @user.id || current_user.admin %>
+            <h3><a href="/user_profiles/<%= @user.id %>/edit">Edit Profile</a></h3>
+          <% end %>
+          <% if current_user && current_user.id == @user.trainer.id || current_user.admin %>
+            <h3>Equipment: {{ user.equipment }} || Paid: {{ user.paid }}</h3>
+          <% end %>
+        </div><!-- END COL-XS-12 -->
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="profile-timeline">
+              <div class="time-box">
+                <div class="box-head">
+                  <span class="box-icon fa fa-ravelry"></span>
+                  <h2>Goals</h2>
+                </div><!-- END BOX-HEAD -->
+                <% if current_user && current_user.id == @user.id || current_user && current_user.id == @user.trainer.id || current_user && current_user.admin %>
+                  <button class="btn btn-lg" v-bind:class="{ 'btn-warning': newGoalForm, 'btn-primary': !newGoalForm }" v-on:click="showNewGoalForm()">{{ message }}</button> <button class="btn btn-lg btn-success" v-if="newGoalForm" v-on:click="submitNewGoal()" >Submit</button>
+                  <template v-if="newGoalForm">
+                    <h2><input v-on:keyup.enter="submitNewGoal()" v-model="newGoal"></h2>
+                  </template>
+                  <h2>Click on the box to mark complete or the trash can to remove the goal.</h2>
+                  <template v-for="goal in user.goals">
+                    <div class="article-post row">
+                      <div class="col-xs-12 col-sm-3 col-md-2 timebox-info">
+                        <div class="article-meta">
+                          <h2>
+                            <span><i v-on:click="toggleComplete(goal)" class="fa" v-bind:class="{ 'fa-check-square-o': goal.completed, 'fa-square-o': !goal.completed }"></i>
+                            <i v-on:click="removeGoal(goal)" class="fa fa-trash"></i></span>
+                          </h2>
+                        </div>    
+                      </div>
+                      <div class="col-xs-12 col-sm-9 col-md-10 post-detail">
+                        <h3>{{ goal.name }}</h3>
+                      </div>
+                    </div><!-- END ARTICLE-POST -->
+                  </template>
+                <% else %>
+                  <template v-for="goal in user.goals">
+                    <div class="article-post row">
+                      <div class="col-xs-12 col-sm-3 col-md-2 timebox-info">
+                        <div class="article-meta">
+                          <h2>
+                            <span>
+                              <i class="fa" v-bind:class="{ 'fa-check-square-o': goal.completed, 'fa-square-o': !goal.completed }"></i>
+                            </span>
+                          </h2>
+                        </div>    
+                      </div>
+                      <div class="col-xs-12 col-sm-9 col-md-10 post-detail">
+                        <h4>{{ goal.name }}</h4>
+                      </div>
+                    </div><!-- END ARTICLE-POST -->
+                  </template>
+                <% end %>
+              </div><!-- END TIME-BOX -->
+            </div><!-- END PROFILE-TIMELINE -->
+          </div><!-- END COL-XS-12 -->
+        </div><!-- END ROW -->
+      </div><!-- END PROFIL-DETAIL -->
+    </div><!-- END CONTAINER -->
+  </section>
 </div>

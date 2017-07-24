@@ -23,7 +23,7 @@ class User < ApplicationRecord
       TrainerProfile.create(name: "Name", gender: 1, bio: "bio", user_id: self.id)
     else
       UserProfile.create(name: "Name", gender: 1, user_id: self.id)
-      self.update(trainer_id: 7)
+      # self.update(trainer_id: 7)
     end
     Avatar.create(url: "https://thesocietypages.org/socimages/files/2009/05/vimeo.jpg", user_id: self.id)
   end

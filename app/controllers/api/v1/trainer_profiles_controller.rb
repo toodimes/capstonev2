@@ -1,7 +1,6 @@
 class Api::V1::TrainerProfilesController < ApplicationController
   before_action :restrict_access
 
-
   def show
     @trainer_profile = User.find_by(id: params[:id])
   end
