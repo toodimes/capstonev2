@@ -27,7 +27,7 @@
           <% if current_user && current_user.id == @user.id || current_user.admin %>
             <h3><a href="/user_profiles/<%= @user.id %>/edit">Edit Profile</a></h3>
           <% end %>
-          <% if current_user && current_user.id == @user.trainer.id || current_user.admin %>
+          <% if current_user && current_user.id == @user.trainer_id || current_user.admin %>
             <h3>Equipment: {{ user.equipment }} || Paid: {{ user.paid }}</h3>
           <% end %>
         </div><!-- END COL-XS-12 -->

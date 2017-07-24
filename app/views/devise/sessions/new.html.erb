@@ -30,9 +30,11 @@
                   </div>
                 </div>
                 <%= f.submit "Log in", class: 'btn btn-default' %>
-                <button class="btn btn-default" type="submit"><i class="fa fa-facebook"></i></button>
-                <button class="btn btn-default" type="submit"><i class="fa fa-twitter"></i></button>
+                <%= link_to user_facebook_omniauth_authorize_path, class: "btn btn-default" do%>
+                  <i class="fa fa-facebook"></i>
+                <% end %>
               <% end %>    
+                <!-- <button class="btn btn-default" type="submit"><i class="fa fa-twitter"></i></button> -->
             </div>
           </div>    
         </div>    
