@@ -8,6 +8,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
       exercises: [],
       searchFilter: '',
       isActive: false,
+      muscles: [],
     },
     mounted: function() {
       var that = this;
@@ -18,6 +19,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
           type: 'GET',
           success: function(result) {
             that.exercises = result;
+            that.muscles = result[0].muscles;
           }
         });
       }
@@ -211,3 +213,10 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
 
 });
+
+function showCoordinates() {
+  var x = event.clientX;
+  var y = event.clientY;
+  var coordinates = "x:" + x + " y:" + y;
+  document.getElementById("coordinates").innerHTML = coordinates;
+}
