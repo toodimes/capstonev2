@@ -6,10 +6,12 @@
         <h3>Connections</h3>
         <hr>
         <h2 v-for="name in allNames"><a :href="'/messages/' + name[1]">{{ name[0] }}</a>  <img class="img-circle message-img" :src="name[2]" alt=""></h2>
+        <span v-if="allNames.length === 0" class="livicon message-index" data-name="user" data-onparent="false" data-size="150"></span>
       </div>
       <div class="col-md-4">
         <h3><a href="/messages/new">New Connection</a></h3>
         <hr>
+        <a href="/messages/new"><span class="livicon message-index" data-name="users-add" data-onparent="false" data-size="150"></span></a>
       </div>
     </div>
   </div>

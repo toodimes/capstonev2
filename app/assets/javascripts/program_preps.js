@@ -111,6 +111,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
       currentUserName: gon.currentUser,
       message: 'Hello worldly!',
       exercises: [],
+      muscles: [],
       searchFilter: '',
       programPrepIDs: [],
       programPrepNames: [],
@@ -124,6 +125,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
           type: 'GET',
           success: function(result) {
             that.exercises = result;
+            that.muscles = result[0].muscles;
           }
         });
         $.ajax({

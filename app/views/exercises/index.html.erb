@@ -27,6 +27,7 @@
       <div class="col-md-12">
         <h4>Filter By Muscle: 
           <button v-on:click="setFilter('')" v-bind:class="{'activeexercise': this.searchFilter === ''}">All Exercises</button>
+          <input v-model="searchFilter">
         </h4>
         <div class="images">
           <template v-for="muscle in muscles">
