@@ -2,11 +2,7 @@
   <nav id="sticktop" class="navbar navbar-default">
     <div class="container">
       <div class="navbar-header">
-        <% if current_user %>
-            <a class="navbar-brand" href="/<%= current_user.trainer_application ? 'trainer_profiles' : 'user_profiles' %>/<%= current_user.id %>"><%= current_user.email %>(<%= current_user.id %>)</a>
-        <% else %>
-            <a class="navbar-brand" href="/">NoRxcuses</a>
-        <% end %>
+        <a class="navbar-brand" href="/"><%= image_tag 'NoRxCuses.jpg' %></a>
       </div>
         
       <div id="dl-menu" class="xv-menuwrapper responsive-menu">
@@ -15,9 +11,10 @@
           <ul class="dl-menu">
               <% if current_user %>
                 <li class="parent"><a href="/messages">Inbox</a></li>
-                <li><a href="/logout">Logout</a></li>
                 <li><a href="/<%= current_user.trainer_application ? 'trainer_profiles' : 'user_profiles' %>/<%= current_user.id %>">My Profile</a></li>
+                <li><a href="/logout">Logout</a></li>
             <% else %>
+                <li><a href="/users/sign_up">Sign Up</a></li>
                 <li><a href="/users/sign_in">Login</a></li>
             <% end %>              
             <li class="parent"><a href="/exercises">Exercises</a>
