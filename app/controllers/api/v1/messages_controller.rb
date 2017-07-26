@@ -20,7 +20,10 @@ class Api::V1::MessagesController < ApplicationController
 
   def create
     # user = User.find_by(id: params[:user_profile_id])
+    user = User.find_by(id: params[:sender_id])
+    recipient = User.find_by(id: params[:recipient_id])
     @message = Message.create(user_id: params[:sender_id], recipient_id: params[:recipient_id], content: params[:content])
+    # UserMailMailer.message_email(user, recipient).deliver
     #DO THE MESSAGE FOR THE VUE TO PUSH INTO THE END OF THE ARRAY
     render :show
   end

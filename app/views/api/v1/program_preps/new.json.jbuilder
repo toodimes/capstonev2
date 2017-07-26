@@ -10,4 +10,9 @@ json.array! @exercises.each do |exercise|
     json.note_id description.id
     json.note description.note
   end
+  json.muscles Muscle.all.each do |muscle|
+    json.id muscle.id
+    json.name muscle.name
+    json.avatar muscle.avatar
+  end
 end

@@ -116,20 +116,31 @@ document.addEventListener("DOMContentLoaded", function(event) {
       currentUserName: gon.currentUser,
       firstProgram: [],
       remainingPrograms: [],
+      foo: "hello"
     },
     mounted: function() {
       var that = this;
-      if (window.location.pathname.includes("/programs/")) {
+      if (window.location.pathname.includes("/programs")) {
+        console.log("past if");
         $.ajax({
           url: '/api/v1/user_profiles/' + this.userID + '/programs.json',
           headers: { "Authorization": 'Token token=' + gon.api },
           type: 'GET',
           success: function(result) {
+            console.log("this is success");
+            console.log(result);
+            console.log(result[0]);
             that.remainingPrograms = result;
             that.firstProgram = result[0];
             that.remainingPrograms.splice(0, 1);
+          },
+          error: function(request, status, error) {
+            console.log("this is fail");
+            console.log(request.responseText);
           }
         });
+      } else {
+        console.log("uhh this is broke");
       }
     },
     methods: {

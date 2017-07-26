@@ -25,10 +25,17 @@
         <div class="col-xs-12 col-md-9">
           <h2>Hi There! I am <span>{{ user.name }}</span></h2>
           <% if current_user && current_user.id == @user.id || current_user.admin %>
-            <h3><a href="/user_profiles/<%= @user.id %>/edit">Edit Profile</a></h3>
+            <h3><a href="/user_profiles/<%= @user.id %>/edit">Edit Profile</a> || <a href="/user_profiles/<%= @user.id %>/programs">Programs</a></h3>
           <% end %>
           <% if current_user && current_user.id == @user.trainer_id || current_user.admin %>
             <h3>Equipment: {{ user.equipment }} || Paid: {{ user.paid }}</h3>
+            <a href="/user_profiles/<%= @user.id %>/program_preps/new"><button class="btn btn-lg btn-success">New Program</button></a>
+            <a href="/user_profiles/<%= @user.id %>/programs"><button class="btn btn-lg btn-info">Past Programs</button></a>
+          <% elsif current_user && current_user.id != @user.id || current_user.id != @user.trainer_id %>
+            <img class="user-profile-trainer-avatar img-rounded img-responsive pull-left" src="<%= @user.trainer.avatars.last.url %>" alt="">
+            <h3><a href="/trainer_profiles/<%= @user.trainer_id %>"><%= @user.trainer.trainer_profile.name %></a></h3>
+            <h4>Certified Trainer</h4>
+            <h4><a href="/messages/<%= @user.trainer_id %>">Message Trainer</a></h4>
           <% end %>
         </div><!-- END COL-XS-12 -->
         <div class="row">
