@@ -1,60 +1,145 @@
-# array = [true, false]
-# array2 = [1,2]
-users = User.where(is_trainer: false)
-trainers = User.where(is_trainer: true)
-# users.each do |user|
-#   user.user_profile.update(name: Faker::StarWars.character, gender: array2.sample, equipment: array.sample)
-#   5.times do 
-#     Goal.create(name: Faker::HarryPotter.quote, completed: array.sample, user_id: user.id)
-#   end
-# end
-# trainers.each do |trainer|
-#   trainer.trainer_profile.update(name: Faker::HarryPotter.character, gender: array2.sample, bio: Faker::StarWars.quote)
-#   3.times do 
-#     Experience.create(user_id: trainer.id, start_date: "present", end_date: "present", title: Faker::StarWars.droid, description: Faker::Hipster.paragraph, company: Faker::StarWars.specie)
-#   end
-#   2.times do 
-#     Qualification.create(user_id: trainer.id, name: Faker::StarWars.vehicle)
-#   end
-# end
-# users.each do |user|
-#   user.update(trainer_id: trainers.sample.id)
-# end
-# Muscle.destroy
-# muscles = ['shoulders', 'biceps', 'triceps', 'abs', 'chest', 'back', 'legs', 'buttocks']
-# # muscles.each do |muscle|
-# #   Muscle.create(name: muscle.capitalize)
-# # end
-# shoulders = ['Posterioir Deltoids', 'Transverse Platter', 'Lateral Raises', 'Front Raises', 'Driving', 'Dumbbell Shoulder Press']
-# biceps = ['Concentration Curls', 'Hammer Curls', 'Regular Curls']
-# triceps = ['Overhead Triceps', 'Tricep Kickbacks', 'Dips']
-# abs = ['Leg Pumps', 'Leg Raises', 'Cross Crunches', 'Crunches', 'Russian Twist']
-# chest = ['Push Ups', 'Push Up On Knees', 'Dumbbell Flyes', 'Dumbbell Chest Press']
-# back = ['One Arm Dumbbell Rows', 'Bent Over Rows', 'Bridging']
-# legs = ['Lunges', 'Deadlift', 'Squat With Lateral Raise', 'Regular Squats', 'Side Leg Extension']
-# buttocks = ['Glute Pump', 'Back Leg Extensions']
-# shoulders.each do |exercise|
-#   Exercise.create(name: exercise, muscle_id: 9)
-# end
-# biceps.each do |exercise|
-#   Exercise.create(name: exercise, muscle_id: 10)
-# end
-# triceps.each do |exercise|
-#   Exercise.create(name: exercise, muscle_id: 11)
-# end
-# abs.each do |exercise|
-#   Exercise.create(name: exercise, muscle_id: 12)
-# end
-# chest.each do |exercise|
-#   Exercise.create(name: exercise, muscle_id: 13)
-# end
-# back.each do |exercise|
-#   Exercise.create(name: exercise, muscle_id: 14)
-# end
-# legs.each do |exercise|
-#   Exercise.create(name: exercise, muscle_id: 15)
-# end
-# buttocks.each do |exercise|
-#   Exercise.create(name: exercise, muscle_id: 16)
-# end
-puts "Done!"
+Description.create!([
+  {note: "Description of exercise still needs to be added.", exercise_id: 2},
+  {note: "Description of exercise still needs to be added.", exercise_id: 3},
+  {note: "Description of exercise still needs to be added.", exercise_id: 6},
+  {note: "Description of exercise still needs to be added.", exercise_id: 8},
+  {note: "Description of exercise still needs to be added.", exercise_id: 9},
+  {note: "Description of exercise still needs to be added.", exercise_id: 11},
+  {note: "Description of exercise still needs to be added.", exercise_id: 12},
+  {note: "Description of exercise still needs to be added.", exercise_id: 13},
+  {note: "Description of exercise still needs to be added.", exercise_id: 14},
+  {note: "Description of exercise still needs to be added.", exercise_id: 15},
+  {note: "Description of exercise still needs to be added.", exercise_id: 16},
+  {note: "Description of exercise still needs to be added.", exercise_id: 17},
+  {note: "Description of exercise still needs to be added.", exercise_id: 20},
+  {note: "Description of exercise still needs to be added.", exercise_id: 21},
+  {note: "Description of exercise still needs to be added.", exercise_id: 22},
+  {note: "Description of exercise still needs to be added.", exercise_id: 23},
+  {note: "Description of exercise still needs to be added.", exercise_id: 25},
+  {note: "Description of exercise still needs to be added.", exercise_id: 26},
+  {note: "Description of exercise still needs to be added.", exercise_id: 27},
+  {note: "Description of exercise still needs to be added.", exercise_id: 28},
+  {note: "Description of exercise still needs to be added.", exercise_id: 29},
+  {note: "Description of exercise still needs to be added.", exercise_id: 30},
+  {note: "Description of exercise still needs to be added.", exercise_id: 31},
+  {note: "Kneel on floor and place hands under shoulders making a table top with your back.", exercise_id: 19},
+  {note: "Move hands 6 to 8 inches forward", exercise_id: 19},
+  {note: "Shift weight so that shoulders are again over hands and back remains flat.", exercise_id: 19},
+  {note: "Bend elbows and bring chest to the floor", exercise_id: 19},
+  {note: "Straighten arms lifting body up keeping back straight", exercise_id: 19},
+  {note: "Bend elbows and repeat", exercise_id: 19},
+  {note: "Lift body over floor whilst balanced on toes and hands", exercise_id: 18},
+  {note: "Shoulders should be over hands and back is flat", exercise_id: 18},
+  {note: "Bend elbows, keeping chest up, and lowering body to floor", exercise_id: 18},
+  {note: "Straighten arms keeping back flat, lifting body up until elbows are straight", exercise_id: 18},
+  {note: "Bend elbows, keep head up and repeat", exercise_id: 18},
+  {note: "Motion should be up and down, as opposed to forward and back", exercise_id: 18},
+  {note: "Get down on left knee", exercise_id: 7},
+  {note: "Place right foot perpendicular to left knee", exercise_id: 7},
+  {note: "Both knees are bent at 90 degrees", exercise_id: 7},
+  {note: "Brace right elbow against the inside of right knees", exercise_id: 7},
+  {note: "Right knee stabilizes right arm", exercise_id: 7},
+  {note: "Curl the dumbbell in right hand up towards shoulder", exercise_id: 7},
+  {note: "Lower and repeat", exercise_id: 7},
+  {note: "Stand with feet shoulder width apart", exercise_id: 4},
+  {note: "Hold dumbbells so that palms are facing legs", exercise_id: 4},
+  {note: "Lift the dumbbells to shoulder height", exercise_id: 4},
+  {note: "Lower dumbbells back to legs", exercise_id: 4},
+  {note: "Repeat", exercise_id: 4},
+  {note: "Stand with feet together, hands stretched up above head with a dumbbell", exercise_id: 10},
+  {note: "Hold dumbbell with both hands by the head of the dumbbell", exercise_id: 10},
+  {note: "The dumbbell lowers back, behind your neck", exercise_id: 10},
+  {note: "Straighten arms moving dumbbell back to the ceiling", exercise_id: 10},
+  {note: "Keep hips under shoulders and shoulders should not move", exercise_id: 10},
+  {note: "Lower dumbbell and repeat", exercise_id: 10},
+  {note: "Feet together, knees bent", exercise_id: 1},
+  {note: "Lean forward from the hips, keeping chest up, back flat", exercise_id: 1},
+  {note: "Hold the dumbbells together with palms facing each other and arms hanging relaxed", exercise_id: 1},
+  {note: "Move arms out to the side so dumbbells move up towards ceiling", exercise_id: 1},
+  {note: "Lower dumbbells back under body and repeat", exercise_id: 1},
+  {note: "Be careful not to lift with lower back.  Only arms move with body position still", exercise_id: 1},
+  {note: "Stand with feet shoulder width apart", exercise_id: 5},
+  {note: "Using a weighted plate or dumbbell, lift your arms straight so weight is shoulder height", exercise_id: 5},
+  {note: "Move arms from shoulders to imitate the motion of turning a steering wheel in a car", exercise_id: 5},
+  {note: "Lie on back, knees bent, feet flat on floor, arms at your side", exercise_id: 24},
+  {note: "Roll from tailbone to the bottom of your shoulder blades", exercise_id: 24},
+  {note: "Move slowly, focus on lifting each vertebrae in succession up, squeeze glutes", exercise_id: 24},
+  {note: "Lower body by rolling down from top to bottom, slowly, pressing each vertebrae into the floor, in succession so that the tailbone touches the floor last", exercise_id: 24},
+  {note: "Repeat", exercise_id: 24}
+])
+Exercise.create!([
+  {name: "Posterioir Deltoids", equipment: false, muscle_id: 9},
+  {name: "Transverse Platter", equipment: false, muscle_id: 9},
+  {name: "Lateral Raises", equipment: false, muscle_id: 9},
+  {name: "Front Raises", equipment: false, muscle_id: 9},
+  {name: "Driving", equipment: false, muscle_id: 9},
+  {name: "Dumbbell Shoulder Press", equipment: false, muscle_id: 9},
+  {name: "Concentration Curls", equipment: false, muscle_id: 10},
+  {name: "Hammer Curls", equipment: false, muscle_id: 10},
+  {name: "Regular Curls", equipment: false, muscle_id: 10},
+  {name: "Overhead Triceps", equipment: false, muscle_id: 11},
+  {name: "Tricep Kickbacks", equipment: false, muscle_id: 11},
+  {name: "Dips", equipment: false, muscle_id: 11},
+  {name: "Leg Pumps", equipment: false, muscle_id: 12},
+  {name: "Leg Raises", equipment: false, muscle_id: 12},
+  {name: "Cross Crunches", equipment: false, muscle_id: 12},
+  {name: "Crunches", equipment: false, muscle_id: 12},
+  {name: "Russian Twist", equipment: false, muscle_id: 12},
+  {name: "Push Ups", equipment: false, muscle_id: 13},
+  {name: "Push Up On Knees", equipment: false, muscle_id: 13},
+  {name: "Dumbbell Flyes", equipment: false, muscle_id: 13},
+  {name: "Dumbbell Chest Press", equipment: false, muscle_id: 13},
+  {name: "One Arm Dumbbell Rows", equipment: false, muscle_id: 14},
+  {name: "Bent Over Rows", equipment: false, muscle_id: 14},
+  {name: "Bridging", equipment: false, muscle_id: 14},
+  {name: "Lunges", equipment: false, muscle_id: 15},
+  {name: "Deadlift", equipment: false, muscle_id: 15},
+  {name: "Squat With Lateral Raise", equipment: false, muscle_id: 15},
+  {name: "Regular Squats", equipment: false, muscle_id: 15},
+  {name: "Side Leg Extension", equipment: false, muscle_id: 15},
+  {name: "Glute Pump", equipment: false, muscle_id: 16},
+  {name: "Back Leg Extensions", equipment: false, muscle_id: 16}
+])
+ExerciseImage.create!([
+  {url: "https://media.giphy.com/media/1w3MyWVVj2giA/giphy.gif", exercise_id: 1},
+  {url: "https://media.giphy.com/media/1w3MyWVVj2giA/giphy.gif", exercise_id: 2},
+  {url: "https://media.giphy.com/media/1w3MyWVVj2giA/giphy.gif", exercise_id: 3},
+  {url: "https://media.giphy.com/media/1w3MyWVVj2giA/giphy.gif", exercise_id: 4},
+  {url: "https://media.giphy.com/media/1w3MyWVVj2giA/giphy.gif", exercise_id: 5},
+  {url: "https://media.giphy.com/media/1w3MyWVVj2giA/giphy.gif", exercise_id: 6},
+  {url: "https://media.giphy.com/media/1w3MyWVVj2giA/giphy.gif", exercise_id: 7},
+  {url: "https://media.giphy.com/media/1w3MyWVVj2giA/giphy.gif", exercise_id: 8},
+  {url: "https://media.giphy.com/media/1w3MyWVVj2giA/giphy.gif", exercise_id: 9},
+  {url: "https://media.giphy.com/media/1w3MyWVVj2giA/giphy.gif", exercise_id: 10},
+  {url: "https://media.giphy.com/media/1w3MyWVVj2giA/giphy.gif", exercise_id: 11},
+  {url: "https://media.giphy.com/media/1w3MyWVVj2giA/giphy.gif", exercise_id: 12},
+  {url: "https://media.giphy.com/media/1w3MyWVVj2giA/giphy.gif", exercise_id: 13},
+  {url: "https://media.giphy.com/media/1w3MyWVVj2giA/giphy.gif", exercise_id: 17},
+  {url: "https://media.giphy.com/media/1w3MyWVVj2giA/giphy.gif", exercise_id: 18},
+  {url: "https://media.giphy.com/media/1w3MyWVVj2giA/giphy.gif", exercise_id: 19},
+  {url: "https://media.giphy.com/media/1w3MyWVVj2giA/giphy.gif", exercise_id: 20},
+  {url: "https://media.giphy.com/media/1w3MyWVVj2giA/giphy.gif", exercise_id: 21},
+  {url: "https://media.giphy.com/media/1w3MyWVVj2giA/giphy.gif", exercise_id: 22},
+  {url: "https://media.giphy.com/media/1w3MyWVVj2giA/giphy.gif", exercise_id: 23},
+  {url: "https://media.giphy.com/media/1w3MyWVVj2giA/giphy.gif", exercise_id: 24},
+  {url: "https://media.giphy.com/media/1w3MyWVVj2giA/giphy.gif", exercise_id: 25},
+  {url: "https://media.giphy.com/media/1w3MyWVVj2giA/giphy.gif", exercise_id: 26},
+  {url: "https://media.giphy.com/media/1w3MyWVVj2giA/giphy.gif", exercise_id: 27},
+  {url: "https://media.giphy.com/media/1w3MyWVVj2giA/giphy.gif", exercise_id: 28},
+  {url: "https://media.giphy.com/media/1w3MyWVVj2giA/giphy.gif", exercise_id: 29},
+  {url: "https://media.giphy.com/media/1w3MyWVVj2giA/giphy.gif", exercise_id: 30},
+  {url: "https://media.giphy.com/media/1w3MyWVVj2giA/giphy.gif", exercise_id: 31},
+  {url: "https://media.giphy.com/media/e8Yog2YGgheDu/giphy.gif", exercise_id: 15},
+  {url: "https://media.giphy.com/media/ipmiIYOCOaY24/giphy.gif", exercise_id: 16},
+  {url: "https://media.giphy.com/media/QbLCnsOEhSrQs/giphy.gif", exercise_id: 14}
+])
+Muscle.create!([
+  {name: "Shoulders", avatar: "/assets/img/muscles/Shoulder_Muscle.png"},
+  {name: "Biceps", avatar: "/assets/img/muscles/biceps_muscle.png"},
+  {name: "Triceps", avatar: "/assets/img/muscles/Triceps_Muscle.png"},
+  {name: "Abs", avatar: "/assets/img/muscles/Abs_Muscle.png"},
+  {name: "Chest", avatar: "/assets/img/muscles/chest_muscle.png"},
+  {name: "Buttocks", avatar: "/assets/img/muscles/Buttocks_Muscle.png"},
+  {name: "Legs", avatar: "/assets/img/muscles/Legs_Muscle.png"},
+  {name: "Back", avatar: "/assets/img/muscles/Back_Muscle.png"}
+])

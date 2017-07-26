@@ -28,6 +28,7 @@ gem 'omniauth-facebook'
 gem 'dotenv-rails'
 gem 'gon'
 gem 'faker'
+gem 'seed_dump'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
